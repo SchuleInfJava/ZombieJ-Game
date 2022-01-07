@@ -28,7 +28,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 	private boolean gameOver = false;
 	private int money = 0;
 	private int wave = 0;
-	private int Zombiewait = 140;
+	private int Zombiewait =0;         
 	private boolean spiel = true;
 
 	private Timer t;
