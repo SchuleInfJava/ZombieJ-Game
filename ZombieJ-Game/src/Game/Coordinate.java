@@ -1,5 +1,5 @@
 package Game;
-//Adrin ist schwul
+
 public class Coordinate {
 
 	private double x;
