@@ -7,7 +7,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
 
 public class Missile extends GameObject { // erweitert von GameObject
-
+	
 	private int range = 50;
 
 	public Missile(Coordinate position, double size, double movingAngle, double movingDistance) {// konstruktor
@@ -25,6 +25,7 @@ public class Missile extends GameObject { // erweitert von GameObject
 	public void setRange(int range) {
 		this.range = range;
 	}
+	
 
 	@Override
 	public void makeMove() { // überschreibend die makeMove methode
@@ -36,7 +37,7 @@ public class Missile extends GameObject { // erweitert von GameObject
 
 	@Override
 	public void paintMe(java.awt.Graphics g) { // zeichnen der kugeln
-
+		
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Color.YELLOW);
 
@@ -55,3 +56,5 @@ public class Missile extends GameObject { // erweitert von GameObject
 	}
 
 }
+
+

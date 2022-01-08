@@ -13,6 +13,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -21,7 +23,9 @@ import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.*;
 
 public class GamePanel extends JPanel {// erben von JPanel
-
+	
+	
+	static JButton shopbutton;
 	private int width = 1000;
 	private int height = 800;
 	private final Dimension prefSize = new Dimension(width, height);
@@ -36,7 +40,9 @@ public class GamePanel extends JPanel {// erben von JPanel
 	private Player player = null;
 	private List<Missile> missiles;
 	private List<Zombie> zombies;
-
+	
+	
+	
 	// Konstruktor
 	public GamePanel() {
 		setFocusable(true);
@@ -104,6 +110,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 					break;
 				case VK_ESCAPE:if(spiel ==true) {
 					pauseGame();
+					 
 					spiel=false;
 				}else {
 					continueGame();
@@ -180,13 +187,20 @@ public class GamePanel extends JPanel {// erben von JPanel
 
 	// pausieren
 	public void pauseGame() {
-		t.stop();
+		 t.stop();
+		
+		
+		
 	}
+	
+	
 
 	// nach dem pausieren wieder starten lassen
 	public void continueGame() {
 		if (!isGameOver())
 			t.start();
+		 
+		 
 	}
 
 	// wenn das spiel neu gestartet wird
@@ -299,6 +313,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 			g.setColor(Color.RED);
 			g.drawString("GAME OVER!", prefSize.width / 2 - 130, prefSize.height / 5);
 		}
+		
 
 	}
 
