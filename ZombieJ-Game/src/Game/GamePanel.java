@@ -24,10 +24,7 @@ import static java.awt.event.KeyEvent.*;
 
 public class GamePanel extends JPanel {// erben von JPanel
 	
-	static JButton continuebutton;
-	static JButton shopbutton;
-	static JButton settingsbutton;
-	static JButton quitbutton;
+	static JButton continuebutton, shopbutton, settingsbutton, quitbutton;
 	private int width = 1000;
 	private int height = 800;
 	private final Dimension prefSize = new Dimension(width, height);
@@ -111,8 +108,8 @@ public class GamePanel extends JPanel {// erben von JPanel
 				case VK_2:player.setWeapon(2);
 					break;
 				case VK_ESCAPE:if(spiel ==true) {
-						
-					 pauseGame();
+					spiel=false;	
+					
 					
 					 continuebutton = new JButton("Continue");
 					 continuebutton.setBounds(300,100,400,75);
@@ -121,7 +118,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 					 continuebutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 					 continuebutton.addActionListener(new ActionHandler());
 					 continuebutton.setVisible(true);
-					 add( continuebutton);
+					 
 					
 					shopbutton = new JButton("Shop");
 					shopbutton.setBounds(300,200,400,75);
@@ -130,7 +127,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 				    shopbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				    shopbutton.addActionListener(new ActionHandler());
 				    shopbutton.setVisible(true);
-					add(shopbutton);
+					
 					 
 					 settingsbutton = new JButton("Settings");
 					 settingsbutton.setBounds(300,300,400,75);
@@ -139,7 +136,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 					 settingsbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 					 settingsbutton.addActionListener(new ActionHandler());
 					 settingsbutton.setVisible(true);
-					 add(settingsbutton);
+					 
 					 
 					 
 					 quitbutton = new JButton("Quit");
@@ -149,10 +146,14 @@ public class GamePanel extends JPanel {// erben von JPanel
 					 quitbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 					 quitbutton.addActionListener(new ActionHandler());
 					 quitbutton.setVisible(true);
+					 add( continuebutton);
+					 add(shopbutton);
+					 add(settingsbutton);
 					 add(quitbutton);
 					 
-					
-						spiel=false; 
+					 pauseGame();
+						 
+						
 					 
 				}else {
 					

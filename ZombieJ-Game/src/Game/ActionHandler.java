@@ -14,7 +14,7 @@ public class ActionHandler implements ActionListener {
 		
 		if(e.getSource() == Main.startbutton) {		 
 			new GameWindow();
-		}
+			Startscreen.frame.setVisible(false);	}
 	//	if(e.getSource() == Main.startbutton) {
 	//		;
 	//	}
@@ -48,7 +48,8 @@ public class ActionHandler implements ActionListener {
 		}
 		
 		if(e.getSource() == GamePanel.quitbutton) {
-			new Startscreen();	
+			Startscreen.frame.setVisible(true);	
+		    GameWindow.Gameframe.setVisible(false);
 		}
 		
 		if(e.getSource() == Settings.ProjektilRot) {

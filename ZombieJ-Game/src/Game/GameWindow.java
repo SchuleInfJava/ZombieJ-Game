@@ -7,21 +7,23 @@ import java.awt.event.WindowEvent;
 public class GameWindow extends JFrame {// erben von JFrame
 
 	private final GamePanel gamepanel;// Membervariable vom typ gamepanel
+	static public JFrame Gameframe;
 
 	public GameWindow() {
 
+		Gameframe = new JFrame();
 		this.gamepanel = new GamePanel(); // neues Gamepanel erstellt
 
 		registerWindowListener(); // methoden aufruf
 
-		add(gamepanel); // fügt dem Jframe das panel hinzu
-		pack();
+		Gameframe.add(gamepanel); // fügt dem Jframe das panel hinzu
+		Gameframe.pack();
 
-		setTitle("ZombieJ-Game");
+		Gameframe.setTitle("ZombieJ-Game");
 
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setVisible(true);
+		Gameframe.setResizable(false);
+		Gameframe.setLocationRelativeTo(null);
+		Gameframe.setVisible(true);
 	}
 
 	// Windowlistener prüft auf aktion mit dem fenster
