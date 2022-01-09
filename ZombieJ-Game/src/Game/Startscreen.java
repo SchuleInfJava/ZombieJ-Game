@@ -65,7 +65,7 @@ public class Startscreen {
 		 frame.add(settingsbutton);
 		 
 		 
-		 
+	
 		 helpbutton = new JButton("Help");
 		 helpbutton.setBounds(200,425,175,75);
 		 helpbutton.setBackground(new Color(255,255,255));

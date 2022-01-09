@@ -25,7 +25,7 @@ public class Settings extends ActionHandler {
 		
 			//Projektilfarbe Rot
 			
-			
+		
 			ProjektilRot = new JButton("Projektil = Rot");
 			ProjektilRot.setBounds(200,125,100,75);
 			ProjektilRot.setBackground(new Color(255, 30, 0));

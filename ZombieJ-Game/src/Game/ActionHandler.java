@@ -11,6 +11,7 @@ public class ActionHandler implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		
 		if(e.getSource() == Main.startbutton) {		 
 			new GameWindow();
 		}

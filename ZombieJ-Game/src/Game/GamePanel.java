@@ -141,6 +141,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 					 settingsbutton.setVisible(true);
 					 add(settingsbutton);
 					 
+					 
 					 quitbutton = new JButton("Quit");
 					 quitbutton.setBounds(300,400,400,75);
 					 quitbutton.setBackground(new Color(255,30,0));
