@@ -24,8 +24,10 @@ import static java.awt.event.KeyEvent.*;
 
 public class GamePanel extends JPanel {// erben von JPanel
 	
-	
+	static JButton continuebutton;
 	static JButton shopbutton;
+	static JButton settingsbutton;
+	static JButton quitbutton;
 	private int width = 1000;
 	private int height = 800;
 	private final Dimension prefSize = new Dimension(width, height);
@@ -109,12 +111,62 @@ public class GamePanel extends JPanel {// erben von JPanel
 				case VK_2:player.setWeapon(2);
 					break;
 				case VK_ESCAPE:if(spiel ==true) {
-					pauseGame();
+						
+					 pauseGame();
+					
+					 continuebutton = new JButton("Continue");
+					 continuebutton.setBounds(300,100,400,75);
+					 continuebutton.setBackground(new Color(0, 255, 68));
+					 continuebutton.setFocusPainted(false);
+					 continuebutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					 continuebutton.addActionListener(new ActionHandler());
+					 continuebutton.setVisible(true);
+					 add( continuebutton);
+					
+					shopbutton = new JButton("Shop");
+					shopbutton.setBounds(300,200,400,75);
+					shopbutton.setBackground(new Color(255, 255, 255));
+					shopbutton.setFocusPainted(false);
+				    shopbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				    shopbutton.addActionListener(new ActionHandler());
+				    shopbutton.setVisible(true);
+					add(shopbutton);
 					 
-					spiel=false;
+					 settingsbutton = new JButton("Settings");
+					 settingsbutton.setBounds(300,300,400,75);
+					 settingsbutton.setBackground(new Color(255,255,255));
+					 settingsbutton.setFocusPainted(false);
+					 settingsbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					 settingsbutton.addActionListener(new ActionHandler());
+					 settingsbutton.setVisible(true);
+					 add(settingsbutton);
+					 
+					 quitbutton = new JButton("Quit");
+					 quitbutton.setBounds(300,400,400,75);
+					 quitbutton.setBackground(new Color(255,30,0));
+					 quitbutton.setFocusPainted(false);
+					 quitbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					 quitbutton.addActionListener(new ActionHandler());
+					 quitbutton.setVisible(true);
+					 add(quitbutton);
+					 
+					
+						spiel=false; 
+					 
 				}else {
+					
 					continueGame();
-					spiel=true;
+					spiel=true;	
+					
+					//continuebutton.setVisible(false);
+					//shopbutton.setVisible(false);
+					//settingsbutton.setVisible(false);
+					//quitbutton.setVisible(false);
+					
+					
+					
+					
+					
 				}
 				    break;
 

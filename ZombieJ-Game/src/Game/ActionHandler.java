@@ -11,14 +11,22 @@ public class ActionHandler implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if(e.getSource() == Main.startbutton) {
+		if(e.getSource() == Main.startbutton) {		 
 			new GameWindow();
-		
 		}
+	//	if(e.getSource() == Main.startbutton) {
+	//		;
+	//	}
 		if(e.getSource() == Main.shopbutton) {
 			;
 		}
+		if(e.getSource() == GamePanel.shopbutton) {
+			;
+		}
 		if(e.getSource() == Main.settingsbutton) {
+			new Settings();
+		}
+		if(e.getSource() == GamePanel.settingsbutton) {
 			new Settings();
 		}
 		if(e.getSource() == Main.helpbutton) {
@@ -37,6 +45,11 @@ public class ActionHandler implements ActionListener {
 		if(e.getSource() == Main.quitbutton) {
 			System.exit(0);	
 		}
+		
+		if(e.getSource() == GamePanel.quitbutton) {
+			new Startscreen();	
+		}
+		
 		if(e.getSource() == Settings.ProjektilRot) {
 			int ColorM = 1;
 		}
