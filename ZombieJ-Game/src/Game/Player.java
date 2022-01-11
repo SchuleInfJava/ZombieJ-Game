@@ -226,8 +226,12 @@ public class Player extends GameObject {
 				PlayerCenterY + cannonEndY - missileSize / 6);
 
 		Missile missile = new Missile(missileStartPosition, missileSize, missileAngle+getTolerance(), getMissiledirection()); // erzeugen ein neues
-																							// Missile
-
+		if (getWeapon()==1) {
+			missile.setRange(85);
+		}else {
+			missile.setRange(35);
+		}																			// Missile
+                
 		setAbleToShoot(false);
 		return missile;
 	}
@@ -247,16 +251,22 @@ public class Player extends GameObject {
 	}
 	
 	public void weaponChange() {
+		double min = -0.3;
+		double max = 0.3;
+		double range=max -min;
+		
 		if (getWeapon()==1) {
 			cannonColor= Color.GRAY;
 			setDamage(2);
-			setMissiledirection(10);
+			
+			setMissiledirection(7);
+			
 			setTolerance(0);
 		}else {
 			cannonColor=Color.BLACK;
 			setDamage(1);
-			setMissiledirection(5);
-			setTolerance(0.2);
+			setMissiledirection(10);
+			setTolerance((Math.random()*range)+min);
 		}
 	}
 

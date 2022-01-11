@@ -1,6 +1,6 @@
 package Game;
 
-public class Main extends Startscreen {
+public class Main  {
 	public Main() {
 
 	}

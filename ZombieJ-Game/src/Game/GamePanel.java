@@ -24,7 +24,7 @@ import static java.awt.event.KeyEvent.*;
 
 public class GamePanel extends JPanel {// erben von JPanel
 	
-	static JButton continuebutton, shopbutton, settingsbutton, quitbutton;
+	static JButton continuebutton, shopbutton, settingsbutton, startmenubutton;
 	private int width = 1000;
 	private int height = 800;
 	private final Dimension prefSize = new Dimension(width, height);
@@ -59,6 +59,14 @@ public class GamePanel extends JPanel {// erben von JPanel
 	// gameover auf einen wert setzen
 	public void setGameOver(boolean gameOver) {
 		this.gameOver = gameOver;
+	}
+
+	public boolean isSpiel() {
+		return spiel;
+	}
+
+	public void setSpiel(boolean spiel) {
+		this.spiel = spiel;
 	}
 
 	// initialisieren unser java spiel
@@ -107,19 +115,69 @@ public class GamePanel extends JPanel {// erben von JPanel
 					break;
 				case VK_2:player.setWeapon(2);
 					break;
-				case VK_ESCAPE:if(spiel ==true) {
-					spiel=false;	
+				case VK_ESCAPE:if(isSpiel() ==true) {
 					
+					setSpiel(false);	
+					pauseGame();
+						 
+						
+					 
+				}else {
+					continueGame();
+					setSpiel(true);	
+					
+					remove( continuebutton);
+					remove( shopbutton);
+					remove( settingsbutton);
+					remove( startmenubutton);
+				}
+				    break;
+
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {// wenn gehalten wird
+				switch (e.getKeyCode()) {
+				case VK_LEFT:player.turnPlayerLeft();
+					break;
+				case VK_RIGHT:player.turnPlayerRight();
+					break;
+                case VK_UP:player.acceleratePlayer();
+					break;
+				case VK_DOWN:player.deceleratePlayer();
+					break;
+				case VK_A:player.turnPlayerLeft();
+					break;
+				case VK_D:player.turnPlayerRight();
+					break;
+                case VK_W:player.acceleratePlayer();
+					break;
+				case VK_S:player.deceleratePlayer();
+					break;
+				case VK_ESCAPE:if(isSpiel() ==true) {
 					
 					 continuebutton = new JButton("Continue");
 					 continuebutton.setBounds(300,100,400,75);
 					 continuebutton.setBackground(new Color(0, 255, 68));
 					 continuebutton.setFocusPainted(false);
 					 continuebutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-					 continuebutton.addActionListener(new ActionHandler());
+					 continuebutton.addActionListener(new ActionListener() {
+						 
+						 @Override public void actionPerformed(ActionEvent e) {
+							 
+								remove( continuebutton);
+								remove( shopbutton);
+								remove( settingsbutton);
+								remove( startmenubutton);
+								continueGame();
+								setSpiel(true);	
+
+						}
+					});
 					 continuebutton.setVisible(true);
 					 
-					
+					 
 					shopbutton = new JButton("Shop");
 					shopbutton.setBounds(300,200,400,75);
 					shopbutton.setBackground(new Color(255, 255, 255));
@@ -138,62 +196,17 @@ public class GamePanel extends JPanel {// erben von JPanel
 					 settingsbutton.setVisible(true);
 					 
 					 
-					 
-					 quitbutton = new JButton("Quit");
-					 quitbutton.setBounds(300,400,400,75);
-					 quitbutton.setBackground(new Color(255,30,0));
-					 quitbutton.setFocusPainted(false);
-					 quitbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-					 quitbutton.addActionListener(new ActionHandler());
-					 quitbutton.setVisible(true);
+					 startmenubutton = new JButton("Startmenu");
+					 startmenubutton.setBounds(300,400,400,75);
+					 startmenubutton.setBackground(new Color(255,30,0));
+					 startmenubutton.setFocusPainted(false);
+					 startmenubutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					 startmenubutton.addActionListener(new ActionHandler());
+					 startmenubutton.setVisible(true);
 					 add( continuebutton);
 					 add(shopbutton);
 					 add(settingsbutton);
-					 add(quitbutton);
-					 
-					 pauseGame();
-						 
-						
-					 
-				}else {
-					
-					continueGame();
-					spiel=true;	
-					
-					//continuebutton.setVisible(false);
-					//shopbutton.setVisible(false);
-					//settingsbutton.setVisible(false);
-					//quitbutton.setVisible(false);
-					
-					
-					
-					
-					
-				}
-				    break;
-
-				}
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {// wenn gehalten wird
-				switch (e.getKeyCode()) {
-				
-				case VK_LEFT:player.turnPlayerLeft();
-					break;
-				case VK_RIGHT:player.turnPlayerRight();
-					break;
-                case VK_UP:player.acceleratePlayer();
-					break;
-				case VK_DOWN:player.deceleratePlayer();
-					break;
-				case VK_A:player.turnPlayerLeft();
-					break;
-				case VK_D:player.turnPlayerRight();
-					break;
-                case VK_W:player.acceleratePlayer();
-					break;
-				case VK_S:player.deceleratePlayer();
+					 add(startmenubutton);}
 					break;
 
 				}

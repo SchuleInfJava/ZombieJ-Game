@@ -9,11 +9,7 @@ import javax.swing.JLabel;
 
 public class Startscreen {
 
-	static JButton startbutton;
-	static JButton shopbutton;
-	static JButton settingsbutton;
-	static JButton helpbutton;
-	static JButton quitbutton;
+	static JButton startbutton, shopbutton, settingsbutton, helpbutton, quitbutton;
 		   JLabel Title;
 		   
   static public JFrame frame;
