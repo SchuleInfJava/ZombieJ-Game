@@ -13,10 +13,10 @@ import java.awt.geom.RoundRectangle2D;
 public class Zombie extends Player {
 
 	private Player player;
-	private int zombielives = 3;
 	private int zombieart = 1;
-	private Color zombieColor = Color.GREEN;
-	private int zdamage = 0;
+	private Color zombieColor = new Color(0,160,0);
+	private int zdamage = 1;
+	private int zcash=2;
 
 	public Zombie(Coordinate position, double size, double movingAngle, double movingDistance, Player player) {
 		super(position, size, size, movingAngle, movingDistance);
@@ -57,6 +57,14 @@ public class Zombie extends Player {
 		this.zdamage = zdamage;
 	}
 
+	public int getZcash() {
+		return zcash;
+	}
+
+	public void setZcash(int zcash) {
+		this.zcash = zcash;
+	}
+
 	@Override
 	public void makeMove() {
 
@@ -88,7 +96,7 @@ public class Zombie extends Player {
 	public void ZombieArt() {
 		int wert =(int)((Math.random()*10)+1);
 		switch (wert) {
-		case 1:
+		    case 1:
 			case 2:
 				setZombieart(2);
 				break;
@@ -101,16 +109,18 @@ public class Zombie extends Player {
 		
 		switch (getZombieart()) {
 		case 1:
-			zombieColor = Color.GREEN;
+			zombieColor = new Color(0,160,0);//Green
 			setZdamage(1);
-			setDrivingVelocity(DRIVING_VELOCIY / 2);
+			setZcash(1);
+			setDrivingVelocity(DRIVING_VELOCIY / 1.5);
 			setLives(3);
 			setLivesStart(3);
-			
 			break;
+			
 		case 2:
-			zombieColor = Color.ORANGE;
+			zombieColor = new Color(255,165,0);//Orange
 			setZdamage(2);
+			setZcash(3);
 			setDrivingVelocity(DRIVING_VELOCIY / 3);
 			setLives(7);
 			setLivesStart(7);
@@ -119,6 +129,7 @@ public class Zombie extends Player {
 		case 3:
 			zombieColor = Color.YELLOW;
 			setZdamage(1);
+			setZcash(2);
 			setDrivingVelocity(DRIVING_VELOCIY * 1.5);
 			setLives(1);
 			setLivesStart(1);

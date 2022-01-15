@@ -25,10 +25,9 @@ public class Startscreen {
 		 frame.setLayout(null);
 		 frame.requestFocus();
 		 
-		 
-		 Title = new JLabel("*Hier Name einfügen*");
-		 Title.setBounds(220,50,400,50);
-		 Title.setFont(Title.getFont().deriveFont((float) 35));
+		 Title = new JLabel("Gun Game");
+		 Title.setBounds(270,50,400,50);
+		 Title.setFont(Title.getFont().deriveFont((float) 50));
 		 frame.add(Title);
 		 
 		 

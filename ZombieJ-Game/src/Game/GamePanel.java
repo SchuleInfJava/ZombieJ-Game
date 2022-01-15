@@ -33,6 +33,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 	private int wave = 0;
 	private int Zombiewait =0;         
 	private boolean spiel = true;
+	
 
 	private Timer t;
 
@@ -67,6 +68,14 @@ public class GamePanel extends JPanel {// erben von JPanel
 
 	public void setSpiel(boolean spiel) {
 		this.spiel = spiel;
+	}
+	
+	public int getMoney() {
+		return money;
+	}
+	
+	public void setMoney(int money) {
+		this.money=money;
 	}
 
 	// initialisieren unser java spiel
@@ -338,7 +347,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 						zombie.setLives(zombie.getLives() - player.getDamage());
 					} else {
 						itZombies.remove();
-						money += 5;
+						money += zombie.getZcash();
 					}
 					itMissiles.remove();
 
