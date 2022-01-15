@@ -313,9 +313,9 @@ public class GamePanel extends JPanel {// erben von JPanel
 			zombie.makeMove();// Zombie bewegt sich
 
 			if (player.touches(zombie)) {
-				if (player.getLives() > 1) {
-					player.setLives(player.getLives() - 1);
-				} else {
+				if (player.getLives() >= 1) {
+					player.setLives(player.getLives() - zombie.getZdamage());
+				} if (player.getLives()==0) {
 					player.setLives(0);
 					endGame();
 				}

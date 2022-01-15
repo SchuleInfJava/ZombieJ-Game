@@ -1,5 +1,7 @@
 	package Game;
 
+import static java.awt.event.KeyEvent.VK_SPACE;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -12,16 +14,19 @@ public class Zombie extends Player {
 
 	private Player player;
 	private int zombielives = 3;
+	private int zombieart = 1;
+	private Color zombieColor = Color.GREEN;
+	private int zdamage = 0;
 
 	public Zombie(Coordinate position, double size, double movingAngle, double movingDistance, Player player) {
 		super(position, size, size, movingAngle, movingDistance);
 		this.player = player;
-
 		setTurningVelocity(TURNING_VELOCITY * 10);
-		setDrivingVelocity(DRIVING_VELOCIY / 2);
+		ZombieArt();
+		//setDrivingVelocity(DRIVING_VELOCIY / 2);
 
-		setLives(zombielives);
-		setLivesStart(zombielives);
+		//setLives(zombielives);
+		//setLivesStart(zombielives);
 
 		setPaintStatusBar(false);
 
@@ -34,6 +39,22 @@ public class Zombie extends Player {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+
+	public int getZombieart() {
+		return zombieart;
+	}
+
+	public void setZombieart(int zombieart) {
+		this.zombieart = zombieart;
+	}
+
+	public int getZdamage() {
+		return zdamage;
+	}
+
+	public void setZdamage(int zdamage) {
+		this.zdamage = zdamage;
 	}
 
 	@Override
@@ -63,7 +84,49 @@ public class Zombie extends Player {
 
 		setMovingAngle(angleToPlayer);
 	}
-
+	
+	public void ZombieArt() {
+		int wert =(int)((Math.random()*10)+1);
+		switch (wert) {
+		case 1:
+			case 2:
+				setZombieart(2);
+				break;
+			case 3:
+				setZombieart(3);
+				break;
+			default:
+				setZombieart(1);
+		}
+		
+		switch (getZombieart()) {
+		case 1:
+			zombieColor = Color.GREEN;
+			setZdamage(1);
+			setDrivingVelocity(DRIVING_VELOCIY / 2);
+			setLives(3);
+			setLivesStart(3);
+			
+			break;
+		case 2:
+			zombieColor = Color.ORANGE;
+			setZdamage(2);
+			setDrivingVelocity(DRIVING_VELOCIY / 3);
+			setLives(7);
+			setLivesStart(7);
+			
+			break;
+		case 3:
+			zombieColor = Color.YELLOW;
+			setZdamage(1);
+			setDrivingVelocity(DRIVING_VELOCIY * 1.5);
+			setLives(1);
+			setLivesStart(1);
+			
+			break;
+		}
+	}
+	
 	@Override
 	public void paintMe(java.awt.Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -94,7 +157,7 @@ public class Zombie extends Player {
 		// rotieren es um den bewgungswinkel mit dem ankerpunkt in der mitte des panzers
 
 		// Zeichnen vom Zombie gedreht
-		g2d.setColor(new Color(0, 150, 0));
+		g2d.setColor(zombieColor);
 		Shape transformed = transform.createTransformedShape(player);
 		g2d.fill(transformed);
 		g2d.setColor(Color.BLACK);
