@@ -263,20 +263,13 @@ public class GamePanel extends JPanel {// erben von JPanel
 
 	// pausieren
 	public void pauseGame() {
-		 t.stop();
-		
-		
-		
+		 t.stop();	
 	}
 	
-	
-
 	// nach dem pausieren wieder starten lassen
 	public void continueGame() {
 		if (!isGameOver())
 			t.start();
-		 
-		 
 	}
 
 	// wenn das spiel neu gestartet wird
@@ -305,7 +298,6 @@ public class GamePanel extends JPanel {// erben von JPanel
 			Zombiewait -= 1;
 
 		} else {
-
 			zombies.add(zombie);
 			Zombiewait = 100;
 		}
@@ -335,7 +327,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 				// hasNext prüft ob es noch weitere Objekte in der LIste gibt
 				
 				Missile missile = itMissiles.next(); // kann man sich das nächste Object aus der liste holen
-				missile.makeMove(); // Geschoss bewegt sich
+				missile.makeMove();// Geschoss bewegt sich
 				
 				if (missile.getRange() <= 0) {// ein geschoss geht der treibstoff aus
 					itMissiles.remove();
@@ -352,13 +344,15 @@ public class GamePanel extends JPanel {// erben von JPanel
 					itMissiles.remove();
 
 				}
-
+				
 			}
 
 		}
 
-		player.makeMove(); // bewegung des Spielers
+		 // bewegung des Spielers
+		player.makeMove();
 		repaint();
+
  }
 	
 

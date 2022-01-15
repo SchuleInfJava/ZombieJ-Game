@@ -225,12 +225,13 @@ public class Player extends GameObject {
 		Coordinate missileStartPosition = new Coordinate(PlayerCenterX + cannonEndX - missileSize / 2,
 				PlayerCenterY + cannonEndY - missileSize / 6);
 
-		Missile missile = new Missile(missileStartPosition, missileSize, missileAngle+getTolerance(), getMissiledirection()); // erzeugen ein neues
+		Missile missile = new Missile(missileStartPosition, missileSize, missileAngle+getTolerance(), getMissiledirection()); 
+		// erzeugen ein neues Missile
 		if (getWeapon()==1) {
 			missile.setRange(85);
 		}else {
 			missile.setRange(35);
-		}																			// Missile
+		}																			
                 
 		setAbleToShoot(false);
 		return missile;
