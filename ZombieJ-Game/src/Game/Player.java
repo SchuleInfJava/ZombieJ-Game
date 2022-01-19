@@ -318,6 +318,8 @@ public class Player extends GameObject {
 		g2d.setColor(Color.BLACK);
 		g2d.setStroke(new BasicStroke((float) 4));
 		g2d.draw(transformed);
+		
+		setTransformedPlayer(transformed);// speichern wir in der Variabel oben für eine saubere collisionsabfrage
 
 		// Zeichnen von Armen
 		transformed = transform.createTransformedShape(armLinks);
@@ -325,12 +327,14 @@ public class Player extends GameObject {
 		transformed = transform.createTransformedShape(armRechts);
 		g2d.draw(transformed);
 
-		setTransformedPlayer(transformed);// speichern wir in der Variabel oben für eine saubere collisionsabfrage
+		
 
 		// Kanone zeichnen
 		g2d.setColor(cannonColor);
 		transformed = transform.createTransformedShape(cannon);
 		g2d.fill(transformed);
+		
+		
 
 	}
 

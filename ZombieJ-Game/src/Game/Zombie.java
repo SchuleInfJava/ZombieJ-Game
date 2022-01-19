@@ -143,9 +143,9 @@ public class Zombie extends Player {
 		Graphics2D g2d = (Graphics2D) g;
 
 		if (isPaintStatusBar()) {
-			paintStatusBars(g2d);// zeichnet die lebensleiste
+			paintStatusBars(g2d);// zeichnet die Lebensleiste
 		}
-		paintZombie(g2d); // zeichnet den panzer
+		paintZombie(g2d); // zeichnet den Zombie
 
 	}
 

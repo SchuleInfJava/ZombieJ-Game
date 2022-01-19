@@ -1,6 +1,7 @@
 package Game;
  
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
@@ -35,7 +36,12 @@ public class Startscreen {
 		 startbutton.setBounds(200,125,400,75);
 		 startbutton.setBackground(new Color(0, 255, 68));
 	     startbutton.setFocusPainted(false);
-		 startbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		 startbutton.setBorder(
+				 BorderFactory.createStrokeBorder(new BasicStroke(6),Color.BLACK)
+				 //BorderFactory.createMatteBorder(6,6,6,6,Color.BLACK)
+				 );
+		 
+		 
 		 startbutton.addActionListener(new ActionHandler());
 		 startbutton.setVisible(true);
 		 frame.add(startbutton);

@@ -135,10 +135,13 @@ public class GamePanel extends JPanel {// erben von JPanel
 					continueGame();
 					setSpiel(true);	
 					
-					remove( continuebutton);
 					remove( shopbutton);
 					remove( settingsbutton);
 					remove( startmenubutton);
+					
+					remove( continuebutton);
+					
+
 				}
 				    break;
 
@@ -175,16 +178,19 @@ public class GamePanel extends JPanel {// erben von JPanel
 						 
 						 @Override public void actionPerformed(ActionEvent e) {
 							 
-								remove( continuebutton);
-								remove( shopbutton);
+							    remove( shopbutton);
 								remove( settingsbutton);
 								remove( startmenubutton);
+								
+								remove( continuebutton);//muss als letztes aufgerufen werden
+								
+
 								continueGame();
 								setSpiel(true);	
 
 						}
 					});
-					 continuebutton.setVisible(true);
+					continuebutton.setVisible(true);
 					 
 					 
 					shopbutton = new JButton("Shop");
@@ -195,7 +201,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 				    shopbutton.addActionListener(new ActionHandler());
 				    shopbutton.setVisible(true);
 					
-					 
+				    	 
 					 settingsbutton = new JButton("Settings");
 					 settingsbutton.setBounds(300,300,400,75);
 					 settingsbutton.setBackground(new Color(255,255,255));
@@ -215,7 +221,8 @@ public class GamePanel extends JPanel {// erben von JPanel
 					 add( continuebutton);
 					 add(shopbutton);
 					 add(settingsbutton);
-					 add(startmenubutton);}
+					 add(startmenubutton);
+					 }
 					break;
 
 				}

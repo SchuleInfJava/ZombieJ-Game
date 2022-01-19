@@ -61,7 +61,7 @@ public abstract class GameObject { // abstracte klasse wie ein interface
 		this.movingDistance = movingDistance;
 	}
 
-	// ob sie nebeneinanderliegen
+	// ob sie nebeneinander liegen
 	public boolean isLeftOf(GameObject that) {
 		return this.getObjectPosition().getX() + this.getWidth() < that.getObjectPosition().getX();
 	}
@@ -85,7 +85,7 @@ public abstract class GameObject { // abstracte klasse wie ein interface
 		return true;
 	}
 
-	// bewegungsrichtugn in einen bewegungsvector umgewandelt winkel zu koordinate
+	// Bewegungsrichtungen in einen bewegungsvector umgewandelt winkel zu koordinate
 	public static Coordinate polarToCartesianCoordinates(double angle) {
 
 		// X-Achse zeigt nach Osten, Y-Achse zeigt nach Süden beim Zeichnen
