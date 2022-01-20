@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
-import java.util.Random;
 import java.awt.geom.Line2D;
 import java.awt.BasicStroke;
 

@@ -1,6 +1,5 @@
 	package Game;
 
-import static java.awt.event.KeyEvent.VK_SPACE;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
