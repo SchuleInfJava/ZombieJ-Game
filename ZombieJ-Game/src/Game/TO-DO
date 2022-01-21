@@ -7,20 +7,23 @@
    Notwendig:
    
    1. Wave system
-   2. weitere waffen
-   3. weitere zombie arten
-   4. Rand kollision
-   5. Interface UI-Design
-   6. Waffen Interface
-   7. Quellcode überarbeiten
-   8. Shop und Settings
+   2. Rand kollision
+   3. Interface UI-Design
+   4. Waffen Interface
+   5. Quellcode überarbeiten
+   6. Shop und Settings
+   7. Button verloren neu start oder in startmenu zurück
    
    Möglich:
    
-   1. Bilder
-   2. Second player play mode
-   3. Ranked list
-   4. Farben und Skins shop
+   1. weitere waffen
+   2. weitere zombie arten
+   3. Bilder
+   4. Mouse Listener steuerung
+   5. Second player play mode
+   6. Ranked list
+   7. Farben und Skins shop
+   8. vorschau
    
 
    
