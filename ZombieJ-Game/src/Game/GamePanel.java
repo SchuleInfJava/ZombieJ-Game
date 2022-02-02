@@ -24,7 +24,7 @@ import static java.awt.event.KeyEvent.*;
 
 public class GamePanel extends JPanel {// erben von JPanel
 	
-	static JButton continuebutton, shopbutton, settingsbutton, startmenubutton;
+	static JButton continuebutton, shopbutton, settingsbutton, startmenubutton,newstartmenubutton;
 	private int width = 1000;
 	private int height = 800;
 	private final Dimension prefSize = new Dimension(width, height);
@@ -259,7 +259,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 	private void initPlayer() {
 		player.setObjectPosition(new Coordinate(150, height / 2 - player.getHeight() / 2));
 		player.setMovingAngle(Math.toRadians(0));
-		player.setLives(10);
+		player.setLives(20);
 	}
 
 	// änderung des Spielzustandes mit hilfe des timers
@@ -292,6 +292,35 @@ public class GamePanel extends JPanel {// erben von JPanel
 	private void endGame() {
 		setGameOver(true);
 		pauseGame();
+		
+		 newstartmenubutton = new JButton("Restart");
+		 newstartmenubutton.setBounds(300,300,400,75);
+		 newstartmenubutton.setBackground(new Color(255,255,255));
+		 newstartmenubutton.setFocusPainted(false);
+		 newstartmenubutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		 newstartmenubutton.addActionListener(new ActionListener() {
+			 
+			 @Override public void actionPerformed(ActionEvent e) {
+				 
+				 restartGame();
+				 remove(newstartmenubutton);
+				 remove(startmenubutton);
+
+			}
+		});
+		 newstartmenubutton.setVisible(true);
+		 
+		 
+		 startmenubutton = new JButton("Startmenu");
+		 startmenubutton.setBounds(300,400,400,75);
+		 startmenubutton.setBackground(new Color(255,30,0));
+		 startmenubutton.setFocusPainted(false);
+		 startmenubutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		 startmenubutton.addActionListener(new ActionHandler());
+		 startmenubutton.setVisible(true);
+		 
+		 add( newstartmenubutton);
+		 add(startmenubutton);
 	}
 
 	public void createZombies() {
@@ -321,9 +350,9 @@ public class GamePanel extends JPanel {// erben von JPanel
 			zombie.makeMove();// Zombie bewegt sich
 
 			if (player.touches(zombie)) {
-				if (player.getLives() >= 1) {
+				if (player.getLives() > 2) {
 					player.setLives(player.getLives() - zombie.getZdamage());
-				} if (player.getLives()==0) {
+				} else {
 					player.setLives(0);
 					endGame();
 				}

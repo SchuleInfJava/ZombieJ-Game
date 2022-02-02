@@ -22,8 +22,8 @@ public class Player extends GameObject {
 
 	private double deltaMovingAngle = 0; // Fahrtrichtung wieviel sich der im nächsten Zyklus änderrt
 	private Color cannonColor = Color.GRAY; // farbe der canone
-	private int lives = 10; // leben während des spiel welches runtergezählt wird
-	private int livesStart = 10; // startwert leben
+	private int lives = 20; // leben während des spiel welches runtergezählt wird
+	private int livesStart = 20; // startwert leben
 	private boolean paintStatusBar = true; // ob lebensleiste angezeigt werden soll oder nicht
 	
 	private int Shootwait =20;

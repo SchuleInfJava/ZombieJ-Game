@@ -109,7 +109,7 @@ public class Zombie extends Player {
 		switch (getZombieart()) {
 		case 1:
 			zombieColor = new Color(0,160,0);//Green
-			setZdamage(1);
+			setZdamage(2);
 			setZcash(1);
 			setDrivingVelocity(DRIVING_VELOCIY / 1.5);
 			setLives(3);
@@ -118,7 +118,7 @@ public class Zombie extends Player {
 			
 		case 2:
 			zombieColor = new Color(255,165,0);//Orange
-			setZdamage(2);
+			setZdamage(4);
 			setZcash(3);
 			setDrivingVelocity(DRIVING_VELOCIY / 3);
 			setLives(7);
@@ -127,7 +127,7 @@ public class Zombie extends Player {
 			break;
 		case 3:
 			zombieColor = Color.YELLOW;
-			setZdamage(1);
+			setZdamage(2);
 			setZcash(2);
 			setDrivingVelocity(DRIVING_VELOCIY * 1.5);
 			setLives(1);
