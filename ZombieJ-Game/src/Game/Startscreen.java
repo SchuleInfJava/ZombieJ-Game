@@ -4,16 +4,27 @@ package Game;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import javax.swing.JFrame;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class Startscreen {
+public class Startscreen extends JLabel{
 
 	static JButton startbutton, shopbutton, settingsbutton, helpbutton, quitbutton;
 		   JLabel Title;
 		   
-  static public JFrame frame;
+    static public JFrame frame;
+ //   public BufferedImage image;
+    ImageLoader il = new ImageLoader();
+
+    
 	
 	
 	 public Startscreen() {
@@ -88,8 +99,27 @@ public class Startscreen {
 		 quitbutton.setVisible(true);
 		 frame.add(quitbutton);
 		 frame.setVisible(true); 
+		 
+		   
+		 
+		
 	 }
-	
+	 protected void paintComponent(Graphics g){
+		 
+
+
+	        super.paintComponent(g);
+
+	        Graphics2D g2d = (Graphics2D) g;
+
+	        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //weichzeihnen
+
+	        
+
+	       // g.drawImage(il.image, 50, 50, null);//kordinaten
+	       g.drawImage(il.image, 50, 50,100,100, null);//kordinaten und bild größe
+	       repaint();
+	    }
 
 
 }

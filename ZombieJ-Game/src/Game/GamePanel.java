@@ -92,7 +92,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 			}
 		});
 
-		addKeyListener(new KeyAdapter() { // Abstrakte klasse das wir nicht alles benutzen müssen
+		this.addKeyListener(new KeyAdapter() { // Abstrakte klasse das wir nicht alles benutzen müssen
 			@Override
 			public void keyReleased(KeyEvent e) {// wenn losgelassen wird
 
@@ -126,7 +126,8 @@ public class GamePanel extends JPanel {// erben von JPanel
 					break;
 				case VK_ESCAPE:if(isSpiel() ==true) {
 					
-					setSpiel(false);	
+					setSpiel(false);
+					repaint();
 					pauseGame();
 						 
 						
@@ -264,7 +265,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 
 	// änderung des Spielzustandes mit hilfe des timers
 	// starten
-	private void startGame() {
+	public void startGame() {
 		t.start();
 	}
 
@@ -284,7 +285,8 @@ public class GamePanel extends JPanel {// erben von JPanel
 		money = 0;
 		wave = 0;
 		setGameOver(false);
-		createGameObjects();
+		//createGameObjects();
+		initGame();
 		startGame();
 	}
 
@@ -302,9 +304,10 @@ public class GamePanel extends JPanel {// erben von JPanel
 			 
 			 @Override public void actionPerformed(ActionEvent e) {
 				 
-				 restartGame();
+				 
 				 remove(newstartmenubutton);
 				 remove(startmenubutton);
+				 restartGame();
 
 			}
 		});
@@ -319,7 +322,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 		 startmenubutton.addActionListener(new ActionHandler());
 		 startmenubutton.setVisible(true);
 		 
-		 add( newstartmenubutton);
+		 add(newstartmenubutton);
 		 add(startmenubutton);
 	}
 
@@ -418,6 +421,11 @@ public class GamePanel extends JPanel {// erben von JPanel
 			g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
 			g.setColor(Color.RED);
 			g.drawString("GAME OVER!", prefSize.width / 2 - 130, prefSize.height / 5);
+		}
+		
+		if(!isSpiel() || isGameOver()) {
+			g.setColor(new Color(100,100,100,128));
+			g.fillRect(0,0,getWidth(),getHeight());
 		}
 		
 
