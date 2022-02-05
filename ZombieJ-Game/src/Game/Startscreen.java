@@ -15,19 +15,21 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Startscreen extends JLabel{
+public class Startscreen {
 
-	static JButton startbutton, shopbutton, settingsbutton, helpbutton, quitbutton;
+	static JButton startbutton, shopbutton, settingsbutton, helpbutton, quitbutton, button;
 		   JLabel Title;
 		   
     static public JFrame frame;
  //   public BufferedImage image;
-    ImageLoader il = new ImageLoader();
+    ImageLoader il;
 
     
 	
 	
 	 public Startscreen() {
+		 
+		 il= new ImageLoader();
 	
 		 frame = new JFrame("ZombieJGame");
 		 frame.setSize(800,600);
@@ -98,28 +100,26 @@ public class Startscreen extends JLabel{
 		 quitbutton.addActionListener(new ActionHandler());
 		 quitbutton.setVisible(true);
 		 frame.add(quitbutton);
+		 
+		 
+		 draw draw = new draw();
+	        draw.setBounds(0,0,800,600); //Größe
+	        draw.setVisible(true);
+	        frame.add(draw);
+	        
+	        button=new JButton();
+	        button.setBounds(400,400,70,70);
+	        button.setIcon(il.icon);
+	        button.setVisible(true);
+	        frame.add(button);
+		 
 		 frame.setVisible(true); 
 		 
 		   
 		 
 		
 	 }
-	 protected void paintComponent(Graphics g){
-		 
-
-
-	        super.paintComponent(g);
-
-	        Graphics2D g2d = (Graphics2D) g;
-
-	        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //weichzeihnen
-
-	        
-
-	       // g.drawImage(il.image, 50, 50, null);//kordinaten
-	       g.drawImage(il.image, 50, 50,100,100, null);//kordinaten und bild größe
-	       repaint();
-	    }
+	 
 
 
 }
