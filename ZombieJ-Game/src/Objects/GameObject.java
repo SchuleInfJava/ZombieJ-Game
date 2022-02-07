@@ -1,4 +1,6 @@
-package Game;
+package Objects;
+
+import config.Coordinate;
 
 public abstract class GameObject { // abstracte klasse wie ein interface
 

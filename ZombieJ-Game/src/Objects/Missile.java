@@ -1,10 +1,12 @@
-package Game;
+package Objects;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
+
+import config.Coordinate;
 
 public class Missile extends GameObject { // erweitert von GameObject
 	

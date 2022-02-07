@@ -1,4 +1,4 @@
-package Game;
+package config;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,20 +18,27 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import MenuUI.ActionHandler;
+import Objects.Missile;
+import Objects.Player;
+import Objects.Zombie;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.*;
 
 public class GamePanel extends JPanel {// erben von JPanel
 	
-	static JButton continuebutton, shopbutton, settingsbutton, startmenubutton,newstartmenubutton;
+	public static JButton continuebutton, shopbutton, settingsbutton, startmenubutton,newstartmenubutton;
 	private int width = 1000;
 	private int height = 800;
 	private final Dimension prefSize = new Dimension(width, height);
 	private boolean gameOver = false;
 	private int money = 0;
 	private int wave = 0;
-	private int Zombiewait =0;         
+	private int zombiedeaths = 0;
+	private static int zombiealive = 0;
+	private int zombiewait =0;         
 	private boolean spiel = true;
 	
 
@@ -76,6 +83,14 @@ public class GamePanel extends JPanel {// erben von JPanel
 	
 	public void setMoney(int money) {
 		this.money=money;
+	}
+
+	public static int getZombiealive() {
+		return zombiealive;
+	}
+
+	public void setZombiealive(int zombiealive) {
+		this.zombiealive = zombiealive;
 	}
 
 	// initialisieren unser java spiel
@@ -253,6 +268,10 @@ public class GamePanel extends JPanel {// erben von JPanel
 		initPlayer(); // Methode aufruf
 		missiles = new LinkedList<>(); // erstellt eine Liste
 		zombies = new LinkedList<>(); // erstellt eine Liste
+		
+		Coordinate zombiec = new Coordinate(0, -100);
+		Zombie zombie = new Zombie(zombiec, 60, Math.toRadians(180), 0, player );
+		zombies.add(zombie);
 
 	}
 
@@ -333,25 +352,40 @@ public class GamePanel extends JPanel {// erben von JPanel
 		Coordinate zombiec = new Coordinate(950, (int) (Math.random() * 800));
 		Zombie zombie = new Zombie(zombiec, zombiesize, Math.toRadians(180), 0, player);
 
-		if (Zombiewait > 0) {
-			Zombiewait -= 1;
+		if (zombiewait > 0) {
+			zombiewait -= 1;
 
 		} else {
 			zombies.add(zombie);
-			Zombiewait = 100;
+			setZombiealive(getZombiealive() + 1);
+			System.out.println(getZombiealive());
+			zombiewait = 100;
 		}
 
+	}
+	
+	public void WaveCounter() {
+		int x =5;
+		if(zombiedeaths==x) {
+			x +=1;
+			wave +=1;
+			zombiedeaths =0;
+		}
 	}
 
 	// Spielzustand und Zeichnen
 	private void doOnTick() {
 		createZombies();
+		WaveCounter();
 		for (Iterator<Zombie> itZombies = zombies.iterator(); itZombies.hasNext();) {
 			//hasNext prüft ob es noch weitere Objekte in der Liste gibt
 			
+			Zombie dummy = zombies.get(0);
 			Zombie zombie = itZombies.next(); // kann man sich das nächste Object aus der liste holen
+			
+			if(zombie != dummy) {
 			zombie.makeMove();// Zombie bewegt sich
-
+			}
 			if (player.touches(zombie)) {
 				if (player.getLives() > 2) {
 					player.setLives(player.getLives() - zombie.getZdamage());
@@ -360,6 +394,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 					endGame();
 				}
 				itZombies.remove();
+				setZombiealive(getZombiealive() - 1);
 			}
 
 			for (Iterator<Missile> itMissiles = missiles.iterator(); itMissiles.hasNext();) {
@@ -378,6 +413,8 @@ public class GamePanel extends JPanel {// erben von JPanel
 						zombie.setLives(zombie.getLives() - player.getDamage());
 					} else {
 						itZombies.remove();
+						zombiedeaths +=1;
+						setZombiealive(getZombiealive() - 1);
 						money += zombie.getZcash();
 					}
 					itMissiles.remove();

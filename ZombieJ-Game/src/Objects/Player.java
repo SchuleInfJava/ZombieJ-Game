@@ -1,10 +1,14 @@
-package Game;
+package Objects;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
+
+import config.Coordinate;
+import config.GamePanel;
+
 import java.awt.geom.Line2D;
 import java.awt.BasicStroke;
 
@@ -224,7 +228,7 @@ public class Player extends GameObject {
 		Coordinate missileStartPosition = new Coordinate(PlayerCenterX + cannonEndX - missileSize / 2,
 				PlayerCenterY + cannonEndY - missileSize / 6);
 
-		Missile missile = new Missile(missileStartPosition, missileSize, missileAngle+getTolerance(), getMissiledirection()); 
+		Missile missile = new Missile(missileStartPosition, missileSize, missileAngle+getTolerance(), (getMissiledirection()));//*GamePanel.getZombiealive())+(GamePanel.getZombiealive()/4)); 
 		// erzeugen ein neues Missile
 		if (getWeapon()==1) {
 			missile.setRange(85);

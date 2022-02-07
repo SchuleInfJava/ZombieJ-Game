@@ -1,4 +1,4 @@
-package Game;
+package config;
 
 public class Coordinate {
 

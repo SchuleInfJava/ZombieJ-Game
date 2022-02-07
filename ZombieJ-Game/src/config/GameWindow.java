@@ -1,6 +1,7 @@
-package Game;
+package config;
 
 import javax.swing.JFrame;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -23,6 +24,7 @@ public class GameWindow extends JFrame {// erben von JFrame
 
 		Gameframe.setTitle("ZombieJ-Game");
 
+		
 		Gameframe.setResizable(false);
 		Gameframe.setLocationRelativeTo(null);
 		Gameframe.setVisible(true);

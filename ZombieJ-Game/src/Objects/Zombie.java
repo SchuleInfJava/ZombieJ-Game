@@ -1,4 +1,4 @@
-	package Game;
+	package Objects;
 
 
 import java.awt.BasicStroke;
@@ -8,6 +8,8 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.geom.RoundRectangle2D;
+
+import config.Coordinate;
 
 public class Zombie extends Player {
 
@@ -90,6 +92,10 @@ public class Zombie extends Player {
 			angleToPlayer = angleToPlayer + 2 * Math.PI;
 
 		setMovingAngle(angleToPlayer);
+	}
+	
+	public void Wavesystem() {
+		
 	}
 	
 	public void ZombieArt() {

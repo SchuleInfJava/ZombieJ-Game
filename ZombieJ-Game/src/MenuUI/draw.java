@@ -1,5 +1,6 @@
-package Game;
+package MenuUI;
 import javax.swing.JLabel;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -20,7 +21,7 @@ ImageLoader il = new ImageLoader();
         
 
        // g.drawImage(il.image, 50, 50, null);//kordinaten
-       g.drawImage(il.image, 50, 50,100,100, null);//kordinaten und bild größe
+       g.drawImage(il.image, 0, 0,820,600, null);//kordinaten und bild größe
         repaint();
     }
 }

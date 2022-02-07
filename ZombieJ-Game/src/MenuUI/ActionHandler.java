@@ -1,8 +1,11 @@
-package Game;
+package MenuUI;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import config.GamePanel;
+import config.GameWindow;
 
 public class ActionHandler implements ActionListener {
 

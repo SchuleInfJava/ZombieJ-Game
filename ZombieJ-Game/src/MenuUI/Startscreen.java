@@ -1,36 +1,23 @@
-package Game;
+package MenuUI;
  
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import javax.swing.JFrame;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class Startscreen {
 
-	static JButton startbutton, shopbutton, settingsbutton, helpbutton, quitbutton, button;
-		   JLabel Title;
-		   
+	static public JButton startbutton, shopbutton, settingsbutton, helpbutton, quitbutton, button;
+	public JLabel Title, bg;
+	
     static public JFrame frame;
- //   public BufferedImage image;
-    ImageLoader il;
-
     
-	
-	
-	 public Startscreen() {
+    public Startscreen() {
 		 
-		 il= new ImageLoader();
-	
 		 frame = new JFrame("ZombieJGame");
 		 frame.setSize(800,600);
 		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //beendet Prozess falls geschlossen wird
@@ -39,22 +26,21 @@ public class Startscreen {
 		 frame.setLayout(null);
 		 frame.requestFocus();
 		 
-		 Title = new JLabel("Gun Game");
-		 Title.setBounds(270,50,400,50);
-		 Title.setFont(Title.getFont().deriveFont((float) 50));
+		 Title = new JLabel("Zombie Shootout");
+		 Title.setBounds(70,50,700,80);
+		 Title.setFont(Title.getFont().deriveFont((float) 80));
 		 frame.add(Title);
+		 
+
 		 
 		 
 		 startbutton = new JButton("Start Game");
 		 startbutton.setBounds(200,125,400,75);
 		 startbutton.setBackground(new Color(0, 255, 68));
 	     startbutton.setFocusPainted(false);
-		 startbutton.setBorder(
-				 BorderFactory.createStrokeBorder(new BasicStroke(6),Color.BLACK)
-				 //BorderFactory.createMatteBorder(6,6,6,6,Color.BLACK)
+		 startbutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(6),Color.BLACK)
+				               //BorderFactory.createMatteBorder(6,6,6,6,Color.BLACK)
 				 );
-		 
-		 
 		 startbutton.addActionListener(new ActionHandler());
 		 startbutton.setVisible(true);
 		 frame.add(startbutton);
@@ -101,25 +87,19 @@ public class Startscreen {
 		 quitbutton.setVisible(true);
 		 frame.add(quitbutton);
 		 
-		 
-		 draw draw = new draw();
-	        draw.setBounds(0,0,800,600); //Größe
-	        draw.setVisible(true);
-	        frame.add(draw);
-	        
-	        button=new JButton();
-	        button.setBounds(400,400,70,70);
-	        button.setIcon(il.icon);
-	        button.setVisible(true);
-	        frame.add(button);
-		 
-		 frame.setVisible(true); 
-		 
-		   
+		 /*
+		 bg = new JLabel("");
+		 bg.setIcon(new ImageIcon("rsc/test.png"));
+		 bg.setBounds(0,0,800,600);
+		 frame.add(bg);
 		 
 		
+		 draw draw = new draw();
+	     draw.setBounds(0,0,800,600); //Größe
+	     draw.setVisible(true);
+	     frame.add(draw);*/
+	     frame.setVisible(true); 
+	     
+
 	 }
-	 
-
-
 }
