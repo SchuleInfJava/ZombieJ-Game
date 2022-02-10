@@ -48,7 +48,7 @@ public class GameWindow extends JFrame {// erben von JFrame
 
 			@Override
 			public void windowActivated(WindowEvent e) {
-				gamepanel.continueGame(); // hier wird das spiel fortgesetzt
+				gamepanel.continueGame();
 			
 			}
 		});

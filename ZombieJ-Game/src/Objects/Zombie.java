@@ -10,6 +10,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.RoundRectangle2D;
 
 import config.Coordinate;
+import config.GamePanel;
 
 public class Zombie extends Player {
 
@@ -94,12 +95,10 @@ public class Zombie extends Player {
 		setMovingAngle(angleToPlayer);
 	}
 	
-	public void Wavesystem() {
-		
-	}
 	
 	public void ZombieArt() {
-		int wert =(int)((Math.random()*10)+1);
+		int wert =(int)((Math.random()*100)+1);
+	/*	int wert =(int)((Math.random()*10)+1);
 		switch (wert) {
 		    case 1:
 			case 2:
@@ -110,6 +109,29 @@ public class Zombie extends Player {
 				break;
 			default:
 				setZombieart(1);
+		}*/
+		
+		if(GamePanel.getWave()<10) {
+			setZombieart(1);
+		}
+		if(GamePanel.getWave()<20 && GamePanel.getWave()>=10) {
+			
+			if(wert<GamePanel.getWave()*1.5) {
+				setZombieart(2);
+			}
+			else {
+				setZombieart(1);
+			}
+		}
+		if(GamePanel.getWave()<100&&GamePanel.getWave()>=20) {
+			if(wert<GamePanel.getWave()) {
+				setZombieart(2);
+			}else if(wert>=GamePanel.getWave() && wert<GamePanel.getWave()+GamePanel.getWave()/2) {
+				setZombieart(3);
+			}
+			else {
+				setZombieart(1);
+			}
 		}
 		
 		switch (getZombieart()) {
@@ -118,8 +140,8 @@ public class Zombie extends Player {
 			setZdamage(2);
 			setZcash(1);
 			setDrivingVelocity(DRIVING_VELOCIY / 1.5);
-			setLives(3);
-			setLivesStart(3);
+			setLives(8);//zwei schuss mit schwerer waffe, vier mit leichter
+			setLivesStart(8);
 			break;
 			
 		case 2:
@@ -127,8 +149,8 @@ public class Zombie extends Player {
 			setZdamage(4);
 			setZcash(3);
 			setDrivingVelocity(DRIVING_VELOCIY / 3);
-			setLives(7);
-			setLivesStart(7);
+			setLives(12);//drei schuss mit schwerer waffe, sex mit leichter
+			setLivesStart(12);
 			
 			break;
 		case 3:
@@ -136,8 +158,8 @@ public class Zombie extends Player {
 			setZdamage(2);
 			setZcash(2);
 			setDrivingVelocity(DRIVING_VELOCIY * 1.5);
-			setLives(1);
-			setLivesStart(1);
+			setLives(4);//ein schuss mit schwerer waffe, zwei mit leichter
+			setLivesStart(4);
 			
 			break;
 		}
@@ -199,7 +221,7 @@ public class Zombie extends Player {
 		RoundRectangle2D livesBarFrame = new RoundRectangle2D.Double(Math.round(getObjectPosition().getX()) - 1,
 				Math.round(getObjectPosition().getY() - barOffsetY) - 1, getWidth() + 1, 6, 0, 0);
 		g2d.draw(livesBarFrame);
-		if (getLives() > 1) {
+		if (getLives() > 2) {
 			g2d.setColor(Color.GREEN);
 		} else {
 			g2d.setColor(Color.RED);

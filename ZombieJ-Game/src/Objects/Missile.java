@@ -10,7 +10,7 @@ import config.Coordinate;
 
 public class Missile extends GameObject { // erweitert von GameObject
 	
-	private int range = 50;
+	private double range = 100;
 
 	public Missile(Coordinate position, double size, double movingAngle, double movingDistance) {// konstruktor
 		super(position, size, size / 3);// überlad den konstruktor von GameObject
@@ -20,11 +20,11 @@ public class Missile extends GameObject { // erweitert von GameObject
 	}
 
 	// Getter / Setter
-	public int getRange() {
+	public double getRange() {
 		return range;
 	}
 
-	public void setRange(int range) {
+	public void setRange(double range) {
 		this.range = range;
 	}
 	
@@ -34,7 +34,7 @@ public class Missile extends GameObject { // erweitert von GameObject
 		if (range > 0)
 			super.makeMove(); // aufruf der makeMove methode der oberklasse solange die range größer als null
 								// ist
-		range--;
+		range-=1.2;
 	}
 
 	@Override

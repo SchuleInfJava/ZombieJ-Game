@@ -261,14 +261,14 @@ public class Player extends GameObject {
 		
 		if (getWeapon()==1) {
 			cannonColor= Color.GRAY;
-			setDamage(2);
+			setDamage(4);
 			
 			setMissiledirection(7);
 			
 			setTolerance(0);
 		}else {
 			cannonColor=Color.BLACK;
-			setDamage(1);
+			setDamage(2);
 			setMissiledirection(10);
 			setTolerance((Math.random()*range)+min);
 		}
