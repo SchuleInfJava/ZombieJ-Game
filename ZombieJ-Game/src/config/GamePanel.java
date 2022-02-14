@@ -30,13 +30,13 @@ import static java.awt.event.KeyEvent.*;
 
 public class GamePanel extends JPanel {// erben von JPanel
 	
-	public static JButton continuebutton, shopbutton, settingsbutton, startmenubutton,newstartmenubutton;
+	public static JButton continuebutton, shopbutton, settingsbutton, startmenubutton,restartbutton,newstartmenubutton;
 	private int width = 1000;
 	private int height = 800;
 	private final Dimension prefSize = new Dimension(width, height);
 	private boolean gameOver = false;
 	private int money = 0;
-	private static int wave = 20;
+	private static int wave = 0;
 	private boolean wavepaint=false;
 	private int zombiedeaths = 0;
 	private static int zombiealive = 0;
@@ -125,15 +125,14 @@ public class GamePanel extends JPanel {// erben von JPanel
 		this.addKeyListener(new KeyAdapter() { // Abstrakte klasse das wir nicht alles benutzen müssen
 			@Override
 			public void keyReleased(KeyEvent e) {// wenn losgelassen wird
-
-				switch (e.getKeyCode()) {
 				
+
+				switch (e.getKeyCode()) {	
 				case VK_SPACE:
 					if (player.isAbleToShoot()) {
-                       missiles.add(player.shoot());
-                      }
+	                   missiles.add(player.shoot());
+	                  }
 					break;
-					
                 case VK_DOWN:
 				case VK_UP:player.stopPlayer();
 					break;
@@ -172,6 +171,9 @@ public class GamePanel extends JPanel {// erben von JPanel
 
 			@Override
 			public void keyPressed(KeyEvent e) {// wenn gehalten wird
+				
+
+
 				switch (e.getKeyCode()) {
 				case VK_LEFT:player.turnPlayerLeft();
 					break;
@@ -319,12 +321,13 @@ public class GamePanel extends JPanel {// erben von JPanel
 
 	// wenn das spiel neu gestartet wird
 	public void restartGame() {
-		money = 0;
-		wave = 0;
+		//player=null;
+		//money = 0;
+		//wave = 0;
 		setGameOver(false);
-		//createGameObjects();
+		createGameObjects();
 		//initGame();
-		continueGame();
+		startGame();
 	}
 
 	// wenn wir verloren haben
@@ -332,35 +335,36 @@ public class GamePanel extends JPanel {// erben von JPanel
 		setGameOver(true);
 		pauseGame();
 		
-		 newstartmenubutton = new JButton("Restart");
-		 newstartmenubutton.setBounds(300,300,400,75);
-		 newstartmenubutton.setBackground(new Color(255,255,255));
+		 newstartmenubutton = new JButton("Startmenu");
+		 newstartmenubutton.setBounds(300,400,400,75);
+		 newstartmenubutton.setBackground(new Color(255,30,0));
 		 newstartmenubutton.setFocusPainted(false);
 		 newstartmenubutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		 newstartmenubutton.addActionListener(new ActionListener() {
+		 newstartmenubutton.addActionListener(new ActionHandler());
+		 newstartmenubutton.setVisible(true);
+		 
+		
+		 add(newstartmenubutton);
+		
+		 restartbutton = new JButton("Restart");
+		 restartbutton.setBounds(300,300,400,75);
+		 restartbutton.setBackground(new Color(255,255,255));
+		 restartbutton.setFocusPainted(false);
+		 restartbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		 restartbutton.addActionListener(new ActionListener() {
 			 
 			 @Override public void actionPerformed(ActionEvent e) {
 				 
-				 
 				 remove(newstartmenubutton);
-				 remove(startmenubutton);
+				 remove(restartbutton);
+				 
 				 restartGame();
 
 			}
 		});
-		 newstartmenubutton.setVisible(true);
-		 
-		 
-		 startmenubutton = new JButton("Startmenu");
-		 startmenubutton.setBounds(300,400,400,75);
-		 startmenubutton.setBackground(new Color(255,30,0));
-		 startmenubutton.setFocusPainted(false);
-		 startmenubutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		 startmenubutton.addActionListener(new ActionHandler());
-		 startmenubutton.setVisible(true);
-		 
-		 add(newstartmenubutton);
-		 add(startmenubutton);
+		 restartbutton.setVisible(true);
+		 add(restartbutton);
+
 	}
 
 	public void createZombies() {
@@ -376,7 +380,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 		} else {
 			zombies.add(zombie);
 			setZombiealive(getZombiealive() + 1);
-			zombiewait = 100-(3*wave);
+			zombiewait = 100-(2*wave);
 		}
 
 	}
@@ -388,6 +392,10 @@ public class GamePanel extends JPanel {// erben von JPanel
 			}
 			wave++;
 			zombiedeaths =0;
+		}
+		
+		if(wave==50) {
+			endGame();
 		}
 		if(wave%5==0) {
 			//wavepaint=true;

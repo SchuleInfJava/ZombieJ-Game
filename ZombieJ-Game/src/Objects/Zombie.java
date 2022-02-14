@@ -123,10 +123,10 @@ public class Zombie extends Player {
 				setZombieart(1);
 			}
 		}
-		if(GamePanel.getWave()<100&&GamePanel.getWave()>=20) {
-			if(wert<GamePanel.getWave()) {
+		if(GamePanel.getWave()>=20) {
+			if(wert<GamePanel.getWave()*1.2) {
 				setZombieart(2);
-			}else if(wert>=GamePanel.getWave() && wert<GamePanel.getWave()+GamePanel.getWave()/2) {
+			}else if(wert>=GamePanel.getWave()*1.2 && wert<GamePanel.getWave()*1.2+(GamePanel.getWave()/2)*1.2) {
 				setZombieart(3);
 			}
 			else {

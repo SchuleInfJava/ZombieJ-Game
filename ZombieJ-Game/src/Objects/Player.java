@@ -5,6 +5,12 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import config.Coordinate;
 import config.GamePanel;
@@ -18,7 +24,7 @@ public class Player extends GameObject {
 	public static final double TURNING_VELOCITY = 0.06; // Drehgeschwindigkeit
 	public static final double DRIVING_VELOCIY = 2.00;// Fahrgeschwindigkeit
 
-	private Shape transformedPlayer = new RoundRectangle2D.Double(); // enthält die Transformierte Form des
+	private Shape  transformedPlayer = new RoundRectangle2D.Double(); // enthält die Transformierte Form des
 																		// Panzerkörpers
 
 	private double turningVelocity = TURNING_VELOCITY;// Speichert den aktuellen Wert der Drehgeschwindigkeit
@@ -54,8 +60,8 @@ public class Player extends GameObject {
 		return transformedPlayer;
 	}
 
-	public void setTransformedPlayer(Shape transformedTankBody) {
-		this.transformedPlayer = transformedTankBody;
+	public void setTransformedPlayer(Shape transformedBody) {
+		this.transformedPlayer = transformedBody;
 	}
 
 	public double getTurningVelocity() {
@@ -288,7 +294,18 @@ public class Player extends GameObject {
 		paintPlayer(g2d); // zeichnet den panzer
 
 	}
-
+/*	
+	BufferedImage LoadImage(String FileName) {
+		BufferedImage img = null;
+		
+		try {
+			img=ImageIO.read(new File(FileName));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return img;
+	}
+*/
 	private void paintPlayer(Graphics2D g2d) {
 
 		// Spieler
@@ -308,11 +325,11 @@ public class Player extends GameObject {
 				getObjectPosition().getY() + getHeight() * 0.05, getObjectPosition().getX() + getWidth() * 1.25,
 				getObjectPosition().getY() + getHeight() * 0.5 - getHeight() * 0.14);
 
+
 		AffineTransform transform = new AffineTransform();
-		transform.rotate(getMovingAngle(), player.getCenterX(), player.getCenterY()); // rotieren es um den
-																						// bewgungswinkel mit dem
-																						// ankerpunkt in der mitt edes
-																						// panzers
+		transform.rotate(getMovingAngle(),player.getCenterX(),player.getCenterY());
+		// rotieren es um den
+																	
 
 		// Zeichnen vom Spieler gedreht
 		g2d.setColor(Color.WHITE);
@@ -322,7 +339,8 @@ public class Player extends GameObject {
 		g2d.setStroke(new BasicStroke((float) 4));
 		g2d.draw(transformed);
 		
-		setTransformedPlayer(transformed);// speichern wir in der Variabel oben für eine saubere collisionsabfrage
+
+		setTransformedPlayer(transformed);
 
 		// Zeichnen von Armen
 		transformed = transform.createTransformedShape(armLinks);
@@ -351,7 +369,7 @@ public class Player extends GameObject {
 				Math.round(getObjectPosition().getY() - barOffsetY) - 1, getWidth() + 1, 6, 0, 0);
 		
 		g2d.draw(livesBarFrame);
-		if (getLives() > 3) {
+		if (getLives() > 6) {
 			g2d.setColor(Color.GREEN);
 		} else {
 			g2d.setColor(Color.RED);
