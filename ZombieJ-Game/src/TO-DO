@@ -7,13 +7,16 @@
    Notwendig:
    
    1. Wave system                                             erledigt
-   2. Rand kollision
-   3. Interface UI-Design
-   4. Waffen Interface
-   5. Quellcode überarbeiten
-   6. Shop und Settings, Settings: Sound,Steuerung,Design
+   2. Rand kollision                                          erledigt
+   3. Interface UI-Design                                     Pius
+   4. Waffen Interface                                        Adrian
+   5. Quellcode überarbeiten                                  Ganz zum Schluss
+   6. Shop und Settings, Settings: Sound,Steuerung,Design     
    7. Button verloren neu start oder in startmenu zurück      erledigt
-   8. Dauer schießen
+   8. Dauer schießen                                          erledigt
+   9. Fenster für Help slide galerie(Bilder/Pfeile) 
+   10. Statt fenster zwitch zu einstellungen JPanel switch    erledigt
+   
    
    Möglich:
    

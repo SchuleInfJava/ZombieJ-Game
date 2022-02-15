@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -50,7 +49,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 	private Timer t;
 
 	private Player player = null;
-	private List<Missile> missiles;
+	public static List<Missile> missiles;
 	private List<Zombie> zombies;
 	
 	
@@ -128,10 +127,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 				
 
 				switch (e.getKeyCode()) {	
-				case VK_SPACE:
-					if (player.isAbleToShoot()) {
-	                   missiles.add(player.shoot());
-	                  }
+				case VK_SPACE:player.stopshootPlayer();
 					break;
                 case VK_DOWN:
 				case VK_UP:player.stopPlayer();
@@ -172,9 +168,10 @@ public class GamePanel extends JPanel {// erben von JPanel
 			@Override
 			public void keyPressed(KeyEvent e) {// wenn gehalten wird
 				
-
-
 				switch (e.getKeyCode()) {
+				
+				case VK_SPACE:player.shootPlayer();
+				    break;
 				case VK_LEFT:player.turnPlayerLeft();
 					break;
 				case VK_RIGHT:player.turnPlayerRight();
@@ -269,7 +266,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 		this.remove( continuebutton);
 	}
 	
-	public void test() {
+	public void WindowButtonRemove() {
 		if(isSpiel()==false) {
 		this.remove( shopbutton);
 		this.remove( settingsbutton);
@@ -278,6 +275,8 @@ public class GamePanel extends JPanel {// erben von JPanel
 		setSpiel(true);	
 		}
 	}
+	
+
 	
 	// spielerobjekte erzeugen
 	private void createGameObjects() {
@@ -409,7 +408,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 	private void doOnTick() {
 		createZombies();
 		WaveCounter();
-		test();
+		WindowButtonRemove();
 		
 		for (Iterator<Zombie> itZombies = zombies.iterator(); itZombies.hasNext();) {
 			//hasNext prüft ob es noch weitere Objekte in der Liste gibt

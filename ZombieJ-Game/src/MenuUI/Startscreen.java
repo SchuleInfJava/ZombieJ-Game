@@ -1,35 +1,39 @@
 package MenuUI;
- 
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import javax.swing.JFrame;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class Startscreen {
-
-	static public JButton startbutton, shopbutton, settingsbutton, helpbutton, quitbutton, button;
+public class Startscreen extends JPanel{
+	
+	private final Dimension size = new Dimension(800, 600);
+	public static JButton startbutton, shopbutton, settingsbutton, helpbutton, quitbutton, button;
 	public JLabel Title, bg;
 	
-    static public JFrame frame;
-    
-    public Startscreen() {
-		 
-		 frame = new JFrame("ZombieJGame");
-		 frame.setSize(800,600);
-		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //beendet Prozess falls geschlossen wird
-		 frame.setResizable(false);
-		 frame.setLocationRelativeTo(null);
-		 frame.setLayout(null);
-		 frame.requestFocus();
-		 
+	public Startscreen() {
+	this.setFocusable(true);
+	this.setPreferredSize(size);
+	this.setLayout(null);
+	this.setVisible(true);
+	Buttoncreator();
+	
+	}
+	
+	public void Buttoncreator() {
+		
 		 Title = new JLabel("Zombie Shootout");
 		 Title.setBounds(70,50,700,80);
 		 Title.setFont(Title.getFont().deriveFont((float) 80));
-		 frame.add(Title);
+		 this.add(Title);
 		 
 
 		 
@@ -43,7 +47,7 @@ public class Startscreen {
 				 );
 		 startbutton.addActionListener(new ActionHandler());
 		 startbutton.setVisible(true);
-		 frame.add(startbutton);
+		 this.add(startbutton);
 		 
 		 
 		 shopbutton = new JButton("Shop");
@@ -53,7 +57,7 @@ public class Startscreen {
 		 shopbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		 shopbutton.addActionListener(new ActionHandler());
 		 shopbutton.setVisible(true);
-		 frame.add(shopbutton);
+		 this.add(shopbutton);
 		 
 		 
 		 
@@ -62,9 +66,18 @@ public class Startscreen {
 		 settingsbutton.setBackground(new Color(255,255,255));
 		 settingsbutton.setFocusPainted(false);
 		 settingsbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		 settingsbutton.addActionListener(new ActionHandler());
+		 settingsbutton.addActionListener(new ActionListener() {
+			 
+			 @Override public void actionPerformed(ActionEvent e) {
+
+				 screen.frame.remove(screen.startscreen);
+				 screen.frame.add(screen.settings);
+				 screen.frame.revalidate();
+				 screen.frame.repaint();
+			}
+		});
 		 settingsbutton.setVisible(true);
-		 frame.add(settingsbutton);
+		 this.add(settingsbutton);
 		 
 		 
 	
@@ -75,7 +88,7 @@ public class Startscreen {
 		 helpbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		 helpbutton.addActionListener(new ActionHandler());
 		 helpbutton.setVisible(true);
-		 frame.add(helpbutton);
+		 this.add(helpbutton);
 		 
 		 
 		 quitbutton = new JButton("Quit");
@@ -85,21 +98,19 @@ public class Startscreen {
 		 quitbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		 quitbutton.addActionListener(new ActionHandler());
 		 quitbutton.setVisible(true);
-		 frame.add(quitbutton);
+		 this.add(quitbutton);
 		 
 		 /*
 		 bg = new JLabel("");
 		 bg.setIcon(new ImageIcon("rsc/test.png"));
 		 bg.setBounds(0,0,800,600);
-		 frame.add(bg);
+		 this.add(bg);
 		 
 		
 		 draw draw = new draw();
 	     draw.setBounds(0,0,800,600); //Größe
 	     draw.setVisible(true);
-	     frame.add(draw);*/
-	     frame.setVisible(true); 
-	     
-
-	 }
+	     this.add(draw);*/
+		  
+	}
 }

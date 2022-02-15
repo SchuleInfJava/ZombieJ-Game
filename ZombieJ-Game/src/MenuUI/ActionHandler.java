@@ -14,13 +14,13 @@ public class ActionHandler implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		/*
-		 * Button vom Startscreen
-		 */
+		
+		
+		  //Button vom Startscreen
+		 
 		if (e.getSource() == Startscreen.startbutton) {
 			new GameWindow();
-			Startscreen.frame.setVisible(false);
+			screen.frame.setVisible(false);
 		}
 
 		if (e.getSource() == Startscreen.shopbutton) {
@@ -44,9 +44,9 @@ public class ActionHandler implements ActionListener {
 			System.exit(0);
 		}
 
-		/*
-		 * Button aus wenn spiel Pausiert ist
-		 */
+		
+		  //Button aus wenn spiel Pausiert ist
+		 
 		if (e.getSource() == GamePanel.continuebutton) {
 			
 			//GamePanel.continueGame();
@@ -62,13 +62,13 @@ public class ActionHandler implements ActionListener {
 		}
 
 		if (e.getSource() == GamePanel.startmenubutton) {
-			Startscreen.frame.setVisible(true);
+			screen.frame.setVisible(true);
 			GameWindow.Gameframe.setVisible(false);
 		}
 
-		/*
-		 * Button aus Settings
-		 */
+		
+		 // Button aus Settings
+		 
 
 		if (e.getSource() == Settings.ProjektilRot) {
 			int ColorM = 1;

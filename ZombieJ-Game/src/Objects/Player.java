@@ -42,6 +42,7 @@ public class Player extends GameObject {
 	private int damage = 2;
 	private int missiledirection=5;
 	private double tolerance=0;
+	public boolean stopshoot=true;
 
 	// konstruktor
 	public Player(Coordinate position, double width, double height, double movingAngle, double movingDistance) {
@@ -178,17 +179,25 @@ public class Player extends GameObject {
 	public void stopPlayer() { // setzt die Movingdistance auf 0
 		setMovingDistance(0);
 	}
+	
+	public void shootPlayer() {
+		stopshoot=false;
+	}
+	
+	public void stopshootPlayer() {
+		stopshoot=true;
+	}
 
 	/*
-	 * @Override public boolean touches(GameObject other) { //überschreibt
-	 * kollsionsabfrage da diese nicht mehr ausreich da er sich dreht Coordinate
-	 * otherPosition = other.getObjectPosition(); double otherCenterX =
-	 * otherPosition.getX() + other.getWidth()/2; double otherCenterY =
-	 * otherPosition.getY() + other.getHeight()/2;
-	 * 
-	 * return getTransformedPlayer().contains(otherCenterX,otherCenterY);
-	 * //kollisonsabfrage aus der awt klasse }
-	 */
+	  @Override public boolean touches(GameObject other) { //überschreibt kollsionsabfrage da diese nicht mehr ausreich da er sich dreht 
+	 Coordinate otherPosition = other.getObjectPosition(); 
+	  double otherCenterX =otherPosition.getX() + other.getWidth()/2; 
+	  double otherCenterY =otherPosition.getY() + other.getHeight()/2;
+	  
+	  return getTransformedPlayer().contains(otherCenterX,otherCenterY);
+	  //kollisonsabfrage aus der awt klasse 
+	  }*/
+	 
 	@Override
 	public void makeMove() {
 		// Winkel der Spielers berechnen
@@ -207,6 +216,8 @@ public class Player extends GameObject {
 		super.makeMove(); // bewegung des spielers
 		shoottimer();
 		weaponChange();
+		Wallcollision();
+		stopshoot();
 		
 
 	}
@@ -244,6 +255,29 @@ public class Player extends GameObject {
                 
 		setAbleToShoot(false);
 		return missile;
+	}
+	
+	public void Wallcollision() {
+		if(getObjectPosition().getY()<=0) {
+			getObjectPosition().setY(0);
+		}
+		if(getObjectPosition().getX()<=0) {
+			getObjectPosition().setX(0);
+		}
+		if(getObjectPosition().getY()>=740) {
+			getObjectPosition().setY(740);
+		}
+		if(getObjectPosition().getX()>=940) {
+			getObjectPosition().setX(940);
+		}
+	}
+	
+	public void stopshoot() {
+		if(stopshoot==false) {
+		if (isAbleToShoot()) {
+            GamePanel.missiles.add(shoot());
+           }
+		}
 	}
 
 	public void shoottimer() {
