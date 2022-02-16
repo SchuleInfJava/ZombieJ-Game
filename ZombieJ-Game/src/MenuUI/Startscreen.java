@@ -86,7 +86,16 @@ public class Startscreen extends JPanel{
 		 helpbutton.setBackground(new Color(255,255,255));
 		 helpbutton.setFocusPainted(false);
 		 helpbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		 helpbutton.addActionListener(new ActionHandler());
+		 helpbutton.addActionListener(new ActionListener() {
+			 
+			 @Override public void actionPerformed(ActionEvent e) {
+
+				 screen.frame.remove(screen.startscreen);
+				 screen.frame.add(screen.help);
+				 screen.frame.revalidate();
+				 screen.frame.repaint();
+			}
+		});
 		 helpbutton.setVisible(true);
 		 this.add(helpbutton);
 		 

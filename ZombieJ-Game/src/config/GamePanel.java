@@ -320,9 +320,9 @@ public class GamePanel extends JPanel {// erben von JPanel
 
 	// wenn das spiel neu gestartet wird
 	public void restartGame() {
-		//player=null;
-		//money = 0;
-		//wave = 0;
+		player=null;
+		money = 0;
+		wave = 0;
 		setGameOver(false);
 		createGameObjects();
 		//initGame();

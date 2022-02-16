@@ -28,18 +28,22 @@ public class ActionHandler implements ActionListener {
 		}
 
 		if (e.getSource() == Startscreen.settingsbutton) {
-			new Settings();
+			
 		}
 
 		if (e.getSource() == Startscreen.helpbutton) {
+			
+			/*
 			System.out.println("Hallo Spieler;\r\n" + "\r\n"
 					+ "Im Spiel \"*hier Name einfügen*\" geht es darum so viele Zombies wie möglich zu vernichten.\r\n"
 					+ "\r\n" + "Euch bewegen könnt ihr sowohl über W A S D also auch über die Pfeiltasten.\r\n" + "\r\n"
 					+ "Schießen könnt ihr durch betätigen der Leertaste und auf den Tasten 1 und 2 seid ihr in der Lage eure Waffen zu wechseln.\r\n"
 					+ "\r\n"
 					+ "Für das Töten jedes Zombies bekommt ihr Geld, welches ihr wiederrum im Shop einsetzen könnt, um euch beispielsweise neu Farben zu kaufen.\r\n"
-					+ "\r\n" + "");
+					+ "\r\n" + "");*/
+			new Help();
 		}
+		
 		if (e.getSource() == Startscreen.quitbutton) {
 			System.exit(0);
 		}
@@ -61,7 +65,7 @@ public class ActionHandler implements ActionListener {
 			new Settings();
 		}
 
-		if (e.getSource() == GamePanel.startmenubutton) {
+		if (e.getSource() == GamePanel.newstartmenubutton) {
 			screen.frame.setVisible(true);
 			GameWindow.Gameframe.setVisible(false);
 		}
