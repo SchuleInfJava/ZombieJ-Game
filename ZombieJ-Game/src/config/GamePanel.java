@@ -14,7 +14,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -31,7 +33,8 @@ import java.awt.BasicStroke;
 
 public class GamePanel extends JPanel {// erben von JPanel
 	
-	public static JButton continuebutton, shopbutton, settingsbutton, startmenubutton,restartbutton,newstartmenubutton;
+	public static JButton continuebutton, shopbutton, settingsbutton, startmenubutton,restartbutton,newstartmenubutton;	
+	public JLabel pistol, mp;
 	private int width = 1000;
 	private int height = 800;
 	private final Dimension prefSize = new Dimension(width, height);
@@ -452,6 +455,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 		createZombies();
 		WaveCounter();
 		WindowButtonRemove();
+		waffeninterface();
 		
 		for (Iterator<Zombie> itZombies = zombies.iterator(); itZombies.hasNext();) {
 			//hasNext prüft ob es noch weitere Objekte in der Liste gibt
@@ -537,10 +541,34 @@ public class GamePanel extends JPanel {// erben von JPanel
 		player.paintMe(g);
 		
 
+		g.setColor(new Color(100,100,100,128));
+		g.fillRect(300,665,400,135);
+		g.setColor(new Color(50,50,50));
+		g.drawRect(300,665,400,134);
+		g.drawLine(435, 668, 435, 796);
+		g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 22));
+		g.setColor(new Color(0));
+		g.drawString("Pistol(1)", 448,790);
+		g.drawString("MP5(2)", 600,790);
+		g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 18));
+		g.drawString("Damage:" + player.damage, 310,702);
+		g.drawString("Firerate:" + player.missiledirection , 310,737);
+	//	g.drawString("Range:" + missile.range , 310,772);
+	
+		if(player.getWeapon()==1) {
+			g.drawRect(440, 670, 125, 125);
+			g.drawString("Range:85" , 310,772);
+		}else {
+			g.drawRect(570, 670, 125, 125);
+			g.drawString("Range:35" , 310,772);
+		}
+	
+	
 		
 		if(!isSpiel() || isGameEnd()) {
 			g.setColor(new Color(100,100,100,128));
 			g.fillRect(0,0,getWidth(),getHeight());
+			
 		}
 		
 		if(!isSpiel()) {			
@@ -586,19 +614,20 @@ public class GamePanel extends JPanel {// erben von JPanel
 			g.setColor(new Color(255,160,0));
 			g.drawString("Wave "+wave, prefSize.width/2-130, prefSize.height / 6);
 		}
+	}
 		
+
+	public void waffeninterface(){
+		pistol = new JLabel("");
+		pistol.setIcon(new ImageIcon("rsc/pistol.png"));
+		pistol.setBounds(445,665,130,130);
+		this.add(pistol);
 		
-		/*
-		 *     Adrians Code: für dich alles lösbar mit der paintcomponent methode 
-		 * 
-		 */
-		
-		if(player.getWeapon()==1) {
-			
-		}else {
-			
-		}
+		mp = new JLabel("");
+		mp.setIcon(new ImageIcon("rsc/mp.png"));
+		mp.setBounds(570,660,130,130);
+		this.add(mp);
 
 	}
+	}
 
-}

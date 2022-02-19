@@ -39,8 +39,8 @@ public class Player extends GameObject {
 	private int Shootwait =20;
 	private boolean ableToShoot = false;
 	private int weapon =1;
-	private int damage = 2;
-	private int missiledirection=5;
+	public int damage = 2;
+	public int missiledirection=5;
 	private double tolerance=0;
 	public boolean stopshoot=true;
 
