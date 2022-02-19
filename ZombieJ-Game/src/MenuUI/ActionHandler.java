@@ -64,6 +64,11 @@ public class ActionHandler implements ActionListener {
 		if (e.getSource() == GamePanel.settingsbutton) {
 			new Settings();
 		}
+		
+		if (e.getSource() == GamePanel.startmenubutton) {
+			screen.frame.setVisible(true);
+			GameWindow.Gameframe.setVisible(false);
+		}
 
 		if (e.getSource() == GamePanel.newstartmenubutton) {
 			screen.frame.setVisible(true);

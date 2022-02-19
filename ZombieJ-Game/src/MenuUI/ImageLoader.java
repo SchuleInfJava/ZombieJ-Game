@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 
 
@@ -11,6 +13,8 @@ public class ImageLoader {
 
 	
 	BufferedImage image;
+	BufferedImage dummy;
+	Icon dreieck;
 	
 
 
@@ -18,8 +22,10 @@ public class ImageLoader {
 
         try {
         	
-            image = ImageIO.read(new File("rsc/background.png")); 
-            image = ImageIO.read(new File("rsc/test.png")); 
+            //image = ImageIO.read(new File("rsc/background.png"));
+            dummy = ImageIO.read(new File("rsc/dummyklein.png")); 
+            //dreieck = new ImageIcon("rsc/dreieck.png");
+            
             
         } catch (IOException e) {
             

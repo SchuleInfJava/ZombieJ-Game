@@ -13,6 +13,7 @@ public class screen extends JFrame{
     public static Settings settings;
     public static Help help;
    
+   
     
     public screen() {
 		 
@@ -21,8 +22,11 @@ public class screen extends JFrame{
 		 this.settings= new Settings();
 		 this.help=new Help();
 		 
+		 
 		 frame.setSize(800,600);
 		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //beendet Prozess falls geschlossen wird
+		// frame.setUndecorated(true);
+		 
 		 frame.requestFocus();
 		 frame.add(startscreen);
 		 frame.pack();

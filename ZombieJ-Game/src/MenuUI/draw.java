@@ -20,8 +20,10 @@ ImageLoader il = new ImageLoader();
 
         
 
-       // g.drawImage(il.image, 50, 50, null);//kordinaten
-       g.drawImage(il.image, 0, 0,820,600, null);//kordinaten und bild größe
+       //g.drawImage(il.image, 50, 50, null);//kordinaten
+       g.drawImage(il.dummy, 0, 0,300,200, null);//kordinaten und bild größe
+       g.drawRect(0,0,350,250);
+       //g.drawImage(il.dummy,200,200,400,400,null);
         repaint();
     }
 }

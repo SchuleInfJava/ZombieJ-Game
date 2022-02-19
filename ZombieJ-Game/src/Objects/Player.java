@@ -21,8 +21,8 @@ import java.awt.BasicStroke;
 public class Player extends GameObject {
 
 	// Variablen
-	public static final double TURNING_VELOCITY = 0.06; // Drehgeschwindigkeit
-	public static final double DRIVING_VELOCIY = 2.00;// Fahrgeschwindigkeit
+	public static final double TURNING_VELOCITY = 0.2; // Drehgeschwindigkeit normal 0.06
+	public static final double DRIVING_VELOCIY = 4.00;// Fahrgeschwindigkeit normal 2
 
 	private Shape  transformedPlayer = new RoundRectangle2D.Double(); // enthält die Transformierte Form des
 																		// Panzerkörpers

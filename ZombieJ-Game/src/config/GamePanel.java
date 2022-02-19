@@ -27,23 +27,28 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.*;
 
+import java.awt.BasicStroke;
+
 public class GamePanel extends JPanel {// erben von JPanel
 	
 	public static JButton continuebutton, shopbutton, settingsbutton, startmenubutton,restartbutton,newstartmenubutton;
 	private int width = 1000;
 	private int height = 800;
 	private final Dimension prefSize = new Dimension(width, height);
-	private boolean gameOver = false;
+	private boolean gameWin = false;
+	private boolean gameEnd = false;
 	private int money = 0;
 	private static int wave = 0;
 	private boolean wavepaint=false;
 	private int zombiedeaths = 0;
+	private int zombiecounter=0;
 	private static int zombiealive = 0;
 	private int zombiewait =0;         
 	private boolean spiel = true;
 	private boolean schleifenbreak= false;
-	public boolean test=true;
-	public int Wavecounter =5;
+	public int wavecounter =5;
+	public int timer=100;
+    public boolean modulo=true;
 	
 
 	private Timer t;
@@ -58,20 +63,30 @@ public class GamePanel extends JPanel {// erben von JPanel
 	public GamePanel() {
 		setFocusable(true);
 		setPreferredSize(prefSize);// feldgröße mit dimension
-
+        setBackground(getBackground());
 		initGame(); // Methodeaufruf
 		startGame(); // Methodenaufruf
 	}
 
 	// abfrage auf was gameover steht
-	public boolean isGameOver() {
-		return gameOver;
+	public boolean isGameWin() {
+		return gameWin;
 	}
 
 	// gameover auf einen wert setzen
-	public void setGameOver(boolean gameOver) {
-		this.gameOver = gameOver;
+	public void setGameWin(boolean gameWin) {
+		this.gameWin = gameWin;
 	}
+	
+	public boolean isGameEnd() {
+		return gameEnd;
+	}
+
+	public void setGameEnd(boolean gameEnd) {
+		this.gameEnd = gameEnd;
+	}
+
+
 
 	public boolean isSpiel() {
 		return spiel;
@@ -191,10 +206,12 @@ public class GamePanel extends JPanel {// erben von JPanel
 				case VK_ESCAPE:if(isSpiel() ==true) {
 					
 					 continuebutton = new JButton("Continue");
-					 continuebutton.setBounds(300,100,400,75);
-					 continuebutton.setBackground(new Color(0, 255, 68));
-					 continuebutton.setFocusPainted(false);
-					 continuebutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					 continuebutton.setBounds(300,230,400,75);
+					 continuebutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+					 continuebutton.setForeground(Color.BLACK);
+					 continuebutton.setBackground(new Color(140,140,140));
+					 continuebutton.setFocusPainted(true);
+					 continuebutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(4),Color.BLACK));
 					 continuebutton.addActionListener(new ActionListener() {
 						 
 						 @Override public void actionPerformed(ActionEvent e) {
@@ -207,28 +224,34 @@ public class GamePanel extends JPanel {// erben von JPanel
 					 
 					 
 					shopbutton = new JButton("Shop");
-					shopbutton.setBounds(300,200,400,75);
-					shopbutton.setBackground(new Color(255, 255, 255));
-					shopbutton.setFocusPainted(false);
-				    shopbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					shopbutton.setBounds(300,330,400,75);
+					shopbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+					shopbutton.setForeground(Color.BLACK);
+					shopbutton.setBackground(new Color(140,140,140));
+					shopbutton.setFocusPainted(true);
+					shopbutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(4),Color.BLACK));
 				    shopbutton.addActionListener(new ActionHandler());
 				    shopbutton.setVisible(true);
 					
 				    	 
 					 settingsbutton = new JButton("Settings");
-					 settingsbutton.setBounds(300,300,400,75);
-					 settingsbutton.setBackground(new Color(255,255,255));
-					 settingsbutton.setFocusPainted(false);
-					 settingsbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					 settingsbutton.setBounds(300,430,400,75);
+					 settingsbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+					 settingsbutton.setForeground(Color.BLACK);
+					 settingsbutton.setBackground(new Color(140,140,140));
+					 settingsbutton.setFocusPainted(true);
+					 settingsbutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(4),Color.BLACK));
 					 settingsbutton.addActionListener(new ActionHandler());
 					 settingsbutton.setVisible(true);
 					 
 					 
 					 startmenubutton = new JButton("Startmenu");
-					 startmenubutton.setBounds(300,400,400,75);
-					 startmenubutton.setBackground(new Color(255,30,0));
-					 startmenubutton.setFocusPainted(false);
-					 startmenubutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					 startmenubutton.setBounds(300,530,400,75);
+					 startmenubutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+					 startmenubutton.setForeground(Color.BLACK);
+					 startmenubutton.setBackground(new Color(140,140,140));
+					 startmenubutton.setFocusPainted(true);
+					 startmenubutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(4),Color.BLACK));
 					 startmenubutton.addActionListener(new ActionHandler());
 					 startmenubutton.setVisible(true);
 					 add( continuebutton);
@@ -314,7 +337,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 	
 	// nach dem pausieren wieder starten lassen
 	public void continueGame() {
-		if (!isGameOver())
+		if (!isGameEnd())
 			t.start();
 	}
 
@@ -323,33 +346,37 @@ public class GamePanel extends JPanel {// erben von JPanel
 		player=null;
 		money = 0;
 		wave = 0;
-		setGameOver(false);
+		setGameEnd(false);
+		setGameWin(false);
 		createGameObjects();
-		//initGame();
 		startGame();
 	}
 
 	// wenn wir verloren haben
 	private void endGame() {
-		setGameOver(true);
-		pauseGame();
+		
+		 setGameEnd(true);
+		 pauseGame();
+
 		
 		 newstartmenubutton = new JButton("Startmenu");
-		 newstartmenubutton.setBounds(300,400,400,75);
-		 newstartmenubutton.setBackground(new Color(255,30,0));
-		 newstartmenubutton.setFocusPainted(false);
-		 newstartmenubutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		 newstartmenubutton.setBounds(300,650,400,75);
+		 newstartmenubutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+         newstartmenubutton.setForeground(Color.BLACK);
+         newstartmenubutton.setBackground(new Color(140,140,140));
+         newstartmenubutton.setFocusPainted(true);
+         newstartmenubutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(4),Color.BLACK));
 		 newstartmenubutton.addActionListener(new ActionHandler());
 		 newstartmenubutton.setVisible(true);
-		 
-		
 		 add(newstartmenubutton);
 		
 		 restartbutton = new JButton("Restart");
-		 restartbutton.setBounds(300,300,400,75);
-		 restartbutton.setBackground(new Color(255,255,255));
-		 restartbutton.setFocusPainted(false);
-		 restartbutton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		 restartbutton.setBounds(300,550,400,75);
+		 restartbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+         restartbutton.setForeground(Color.BLACK);
+         restartbutton.setBackground(new Color(140,140,140));
+         restartbutton.setFocusPainted(true);
+         restartbutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(4),Color.BLACK));
 		 restartbutton.addActionListener(new ActionListener() {
 			 
 			 @Override public void actionPerformed(ActionEvent e) {
@@ -384,24 +411,40 @@ public class GamePanel extends JPanel {// erben von JPanel
 
 	}
 	
+
 	public void WaveCounter() {
-		if(zombiedeaths==Wavecounter) {
+
+		if(zombiedeaths==wavecounter) {
 			if(wave<20) {
-			Wavecounter++;
+			wavecounter++;
 			}
 			wave++;
+			modulo=true;
 			zombiedeaths =0;
+		}
+		
+		if(wave!=0) {
+			if(modulo==true) {
+				if(wave%5==0 && wave!=50) {
+					wavepaint=true;
+					modulo=false;
+				}
+			}
 		}
 		
 		if(wave==50) {
 			endGame();
+			setGameWin(true);
 		}
-		if(wave%5==0) {
-			//wavepaint=true;
-			
-		}else {
+
+
+
+		
+		if(timer<=0) {
 			wavepaint=false;
+			timer=100;
 		}
+		timer-=1;
 	}
 
 	// Spielzustand und Zeichnen
@@ -448,6 +491,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 					} else {
 						itZombies.remove();
 						zombiedeaths +=1;
+						zombiecounter+=1;
 						setZombiealive(getZombiealive() - 1);
 						money += zombie.getZcash();
 					}
@@ -480,6 +524,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 		g.setColor(Color.BLACK);
 		g.drawString("Money:" + money + "$", 20, 80);
 		g.drawString("Wave:" + wave, 20, 40);// Schrift +farbe+ text
+		
 
 		for (Missile missile : missiles) {
 			missile.paintMe(g);
@@ -490,23 +535,68 @@ public class GamePanel extends JPanel {// erben von JPanel
 		}
 
 		player.paintMe(g);
-
-		if (isGameOver()) {
-			g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
-			g.setColor(Color.RED);
-			g.drawString("GAME OVER!", prefSize.width / 2 - 130, prefSize.height / 5);
-		}
 		
-		if(!isSpiel() || isGameOver()) {
+
+		
+		if(!isSpiel() || isGameEnd()) {
 			g.setColor(new Color(100,100,100,128));
 			g.fillRect(0,0,getWidth(),getHeight());
-	
 		}
 		
+		if(!isSpiel()) {			
+			g.setColor(new Color(87,120,150));
+			g.fillRect(250,150,500,500);
+			
+			g.setColor(Color.BLACK);
+			g.drawRect(250,150,500,500);
+			
+			g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 60));
+			g.drawString("Options:",360,200);
+			g.drawLine(360,203,660,203);
+		}
+
+		if (isGameEnd()) {
+			if(isGameWin()) {
+				g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 160));
+				g.setColor(new Color(0,230,0));
+				g.drawString("You Win", 150 , 220);
+			}else {
+				g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 140));
+				g.setColor(Color.RED);
+				g.drawString("GAME OVER!", 100 , 220);
+			}
+			g.setColor(new Color(87,120,150));
+			g.fillRect(255,235,485,525);
+			
+			g.setColor(Color.BLACK);
+			g.drawRect(255,235,485,525);
+			
+			g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 100));
+			g.drawString("Stats", 350, 310);
+			g.drawLine(350,313,650,313);
+			
+			g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 70));
+			g.drawString("Money: "+ money, 330, 380);
+			g.drawString("Kills: "+ zombiecounter, 330 , 450);
+			g.drawString("Wave:  "+ wave, 330 , 520);
+		}
+
 		if(wavepaint==true) {
-			g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
-			g.setColor(Color.BLUE);
-			g.drawString("Wave "+wave, prefSize.width / 2 - 130, prefSize.height / 5);
+			g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 80));
+			g.setColor(new Color(255,160,0));
+			g.drawString("Wave "+wave, prefSize.width/2-130, prefSize.height / 6);
+		}
+		
+		
+		/*
+		 *     Adrians Code: für dich alles lösbar mit der paintcomponent methode 
+		 * 
+		 */
+		
+		if(player.getWeapon()==1) {
+			
+		}else {
+			
 		}
 
 	}
