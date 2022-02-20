@@ -41,7 +41,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 	private boolean gameWin = false;
 	private boolean gameEnd = false;
 	private int money = 0;
-	private static int wave = 0;
+	private static int wave = 29;
 	private boolean wavepaint=false;
 	private int zombiedeaths = 0;
 	private int zombiecounter=0;
@@ -67,6 +67,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 		setFocusable(true);
 		setPreferredSize(prefSize);// feldgröße mit dimension
         setBackground(getBackground());
+        setLayout(null);
 		initGame(); // Methodeaufruf
 		startGame(); // Methodenaufruf
 	}
@@ -88,8 +89,6 @@ public class GamePanel extends JPanel {// erben von JPanel
 	public void setGameEnd(boolean gameEnd) {
 		this.gameEnd = gameEnd;
 	}
-
-
 
 	public boolean isSpiel() {
 		return spiel;
@@ -127,13 +126,14 @@ public class GamePanel extends JPanel {// erben von JPanel
 
 	// initialisieren unser java spiel
 	private void initGame() {
-
+		waffeninterface();
 		createGameObjects();// erzeugen spieler objekte
 
 		t = new Timer(20, new ActionListener() {// spieltimer oder clock alle 20ms
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				doOnTick();
+				
 				// Methoden aufruf zeichen der figuren und spielstand zu testen
 
 			}
@@ -325,6 +325,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 		player.setObjectPosition(new Coordinate(150, height / 2 - player.getHeight() / 2));
 		player.setMovingAngle(Math.toRadians(0));
 		player.setLives(20);
+		
 	}
 
 	// änderung des Spielzustandes mit hilfe des timers
@@ -353,6 +354,8 @@ public class GamePanel extends JPanel {// erben von JPanel
 		setGameWin(false);
 		createGameObjects();
 		startGame();
+		add(pistol);
+		add(mp);
 	}
 
 	// wenn wir verloren haben
@@ -360,7 +363,10 @@ public class GamePanel extends JPanel {// erben von JPanel
 		
 		 setGameEnd(true);
 		 pauseGame();
-
+			if(isGameEnd()) {
+				remove(pistol);
+				remove(mp);
+			}
 		
 		 newstartmenubutton = new JButton("Startmenu");
 		 newstartmenubutton.setBounds(300,650,400,75);
@@ -449,13 +455,29 @@ public class GamePanel extends JPanel {// erben von JPanel
 		}
 		timer-=1;
 	}
+	
+	public void waffeninterface(){
+
+		pistol = new JLabel("");
+		pistol.setIcon(new ImageIcon("rsc/pistol.png"));
+		pistol.setBounds(445,665,130,130);
+		add(pistol);
+		
+		mp = new JLabel("");
+		mp.setIcon(new ImageIcon("rsc/mp.png"));
+		mp.setBounds(570,660,130,130);
+		add(mp);
+	}
 
 	// Spielzustand und Zeichnen
 	private void doOnTick() {
 		createZombies();
 		WaveCounter();
 		WindowButtonRemove();
-		waffeninterface();
+		
+
+
+		
 		
 		for (Iterator<Zombie> itZombies = zombies.iterator(); itZombies.hasNext();) {
 			//hasNext prüft ob es noch weitere Objekte in der Liste gibt
@@ -517,10 +539,11 @@ public class GamePanel extends JPanel {// erben von JPanel
  }
 	
 
+	
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -543,24 +566,37 @@ public class GamePanel extends JPanel {// erben von JPanel
 
 		g.setColor(new Color(100,100,100,128));
 		g.fillRect(300,665,400,135);
+		
 		g.setColor(new Color(50,50,50));
 		g.drawRect(300,665,400,134);
 		g.drawLine(435, 668, 435, 796);
+		
 		g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 22));
 		g.setColor(new Color(0));
 		g.drawString("Pistol(1)", 448,790);
 		g.drawString("MP5(2)", 600,790);
+		
+		g.drawRect(309,680,115,30);
+		g.drawRect(309,720,115,30);
+		g.drawRect(309,760,115,30);
+		g.setColor(new Color(200,200,200));
+		g.fillRect(309,680,115,30);
+		g.fillRect(309,720,115,30);
+		g.fillRect(309,760,115,30);
+			
 		g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 18));
-		g.drawString("Damage:" + player.damage, 310,702);
-		g.drawString("Firerate:" + player.missiledirection , 310,737);
-	//	g.drawString("Range:" + missile.range , 310,772);
+		g.setColor(Color.BLACK);
+		g.drawString("Damage: " + player.damage/2, 316,700);
+		
 	
 		if(player.getWeapon()==1) {
 			g.drawRect(440, 670, 125, 125);
-			g.drawString("Range:85" , 310,772);
+			g.drawString("Range: 85" , 316,780);
+			g.drawString("Speed:  " + player.missiledirection , 316,740);
 		}else {
 			g.drawRect(570, 670, 125, 125);
-			g.drawString("Range:35" , 310,772);
+			g.drawString("Range: 35" , 316,780);
+			g.drawString("Speed: " + player.missiledirection , 316,740);
 		}
 	
 	
@@ -587,11 +623,11 @@ public class GamePanel extends JPanel {// erben von JPanel
 			if(isGameWin()) {
 				g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 160));
 				g.setColor(new Color(0,230,0));
-				g.drawString("You Win", 150 , 220);
+				g.drawString("You Win", 150 , 180);
 			}else {
 				g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 140));
 				g.setColor(Color.RED);
-				g.drawString("GAME OVER!", 100 , 220);
+				g.drawString("GAME OVER!", 100 , 180);
 			}
 			g.setColor(new Color(87,120,150));
 			g.fillRect(255,235,485,525);
@@ -617,17 +653,6 @@ public class GamePanel extends JPanel {// erben von JPanel
 	}
 		
 
-	public void waffeninterface(){
-		pistol = new JLabel("");
-		pistol.setIcon(new ImageIcon("rsc/pistol.png"));
-		pistol.setBounds(445,665,130,130);
-		this.add(pistol);
-		
-		mp = new JLabel("");
-		mp.setIcon(new ImageIcon("rsc/mp.png"));
-		mp.setBounds(570,660,130,130);
-		this.add(mp);
 
-	}
 	}
 

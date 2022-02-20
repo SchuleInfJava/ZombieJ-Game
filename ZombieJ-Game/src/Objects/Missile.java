@@ -10,7 +10,7 @@ import config.Coordinate;
 
 public class Missile extends GameObject { // erweitert von GameObject
 	
-	private double range = 100;
+	private double range = 80;
 
 	public Missile(Coordinate position, double size, double movingAngle, double movingDistance) {// konstruktor
 		super(position, size, size / 3);// überlad den konstruktor von GameObject
