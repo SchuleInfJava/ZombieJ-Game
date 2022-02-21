@@ -2,12 +2,15 @@ package config;
 
 import javax.swing.JFrame;
 
+import MenuUI.ChoosePlayerColor;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class GameWindow extends JFrame {// erben von JFrame
 
-	private final GamePanel gamepanel;// Membervariable vom typ gamepanel
+	public static GamePanel gamepanel;// Membervariable vom typ gamepanel
+	public static ChoosePlayerColor choosePlayerColor;
 	public static JFrame Gameframe;
 
 	public GameWindow() {
@@ -15,6 +18,7 @@ public class GameWindow extends JFrame {// erben von JFrame
 
 		Gameframe = new JFrame();
 		this.gamepanel = new GamePanel(); // neues Gamepanel erstellt
+		choosePlayerColor  = new ChoosePlayerColor();
 
 		registerWindowListener(); // methoden aufruf
 

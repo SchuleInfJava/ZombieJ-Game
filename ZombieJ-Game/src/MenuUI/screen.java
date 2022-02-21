@@ -4,6 +4,8 @@ package MenuUI;
 
 import javax.swing.JFrame;
 
+import config.GamePanel;
+
 public class screen extends JFrame{
 
 
@@ -12,6 +14,9 @@ public class screen extends JFrame{
     public static Startscreen startscreen;
     public static Settings settings;
     public static Help help;
+   
+    public static boolean screen=true;
+    
    
    
     
@@ -22,11 +27,8 @@ public class screen extends JFrame{
 		 this.settings= new Settings();
 		 this.help=new Help();
 		 
-		 
 		 frame.setSize(800,600);
 		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //beendet Prozess falls geschlossen wird
-		// frame.setUndecorated(true);
-		 
 		 frame.requestFocus();
 		 frame.add(startscreen);
 		 frame.pack();

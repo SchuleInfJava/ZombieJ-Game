@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import Objects.Missile;
 import Objects.Zombie;
+import config.GameWindow;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -70,11 +71,21 @@ public class Help extends JPanel{
 			Back.addActionListener(new ActionListener() {
 				 
 				 @Override public void actionPerformed(ActionEvent e) {
-					 
-					 screen.frame.remove(screen.help);
-					 screen.frame.add(screen.startscreen);
-					 screen.frame.revalidate();
-					 screen.frame.repaint();
+					if(screen.screen) {
+						 screen.frame.remove(screen.help);
+						 screen.frame.add(screen.startscreen);
+						 screen.frame.revalidate();
+						 screen.frame.repaint();
+					}else {
+						 GameWindow.Gameframe.setLocationRelativeTo(null);
+		                 GameWindow.Gameframe.remove(screen.help);
+		                 GameWindow.Gameframe.add(GameWindow.gamepanel);
+		                 GameWindow.Gameframe.revalidate();
+		                 GameWindow.Gameframe.repaint();
+			             GameWindow.Gameframe.setSize(1000,800);
+			             GameWindow.Gameframe.setLocationRelativeTo(null);
+					}
+
 
 				}
 			});

@@ -23,7 +23,7 @@ public class ImageLoader {
         try {
         	
             //image = ImageIO.read(new File("rsc/background.png"));
-            dummy = ImageIO.read(new File("rsc/dummyklein.png")); 
+            dummy = ImageIO.read(new File("rsc/dummys/4.png")); 
             //dreieck = new ImageIcon("rsc/dreieck.png");
             
             

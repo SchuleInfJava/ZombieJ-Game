@@ -31,6 +31,7 @@ public class Player extends GameObject {
 	private double drivingVelocity = DRIVING_VELOCIY; // Speichert den aktuellen Wert der Fahrgeschwindigkeit
 
 	private double deltaMovingAngle = 0; // Fahrtrichtung wieviel sich der im nächsten Zyklus änderrt
+	private Color playerColor = Color.WHITE;
 	private Color cannonColor = Color.GRAY; // farbe der canone
 	private int lives = 20; // leben während des spiel welches runtergezählt wird
 	private int livesStart = 20; // startwert leben
@@ -43,6 +44,7 @@ public class Player extends GameObject {
 	public int missiledirection=5;
 	private double tolerance=0;
 	public boolean stopshoot=true;
+	public boolean playerHelm;
 
 	// konstruktor
 	public Player(Coordinate position, double width, double height, double movingAngle, double movingDistance) {
@@ -95,6 +97,14 @@ public class Player extends GameObject {
 
 	public void setCannonColor(Color cannonColor) {
 		this.cannonColor = cannonColor;
+	}
+	
+	public Color getPlayerColor() {
+		return playerColor;
+	}
+
+	public void setPlayerColor(Color playerColor) {
+		this.playerColor = playerColor;
 	}
 	
 	public int getWeapon() {
@@ -300,14 +310,14 @@ public class Player extends GameObject {
 		double range=max -min;
 		
 		if (getWeapon()==1) {
-			cannonColor= Color.GRAY;
+			playerHelm=false;
 			setDamage(4);
 			
 			setMissiledirection(7);
 			
 			setTolerance(0);
 		}else {
-			cannonColor=Color.BLACK;
+			playerHelm=true;
 			setDamage(2);
 			setMissiledirection(10);
 			setTolerance((Math.random()*range)+min);
@@ -350,6 +360,9 @@ public class Player extends GameObject {
 		RoundRectangle2D cannon = new RoundRectangle2D.Double(getObjectPosition().getX() + getWidth() * 1.1,
 				getObjectPosition().getY() + getHeight() * 0.5 - getHeight() * 0.14, getWidth() * 0.6,
 				getHeight() * 0.28, 0, 0);
+		
+		RoundRectangle2D playerhelm = new RoundRectangle2D.Double(getObjectPosition().getX()+getWidth()/4-10, getObjectPosition().getY()+getHeight()/4,
+				getWidth()/2, getHeight()/2, 360, 360);
 
 		Line2D armRechts = new Line2D.Double(getObjectPosition().getX() + getWidth() * 0.7,
 				getObjectPosition().getY() + getHeight() * 0.95, getObjectPosition().getX() + getWidth() * 1.25,
@@ -366,7 +379,7 @@ public class Player extends GameObject {
 																	
 
 		// Zeichnen vom Spieler gedreht
-		g2d.setColor(Color.WHITE);
+		g2d.setColor(playerColor);
 		Shape transformed = transform.createTransformedShape(player);
 		g2d.fill(transformed);
 		g2d.setColor(Color.BLACK);
@@ -375,6 +388,9 @@ public class Player extends GameObject {
 		
 
 		setTransformedPlayer(transformed);
+		
+
+
 
 		// Zeichnen von Armen
 		transformed = transform.createTransformedShape(armLinks);
@@ -382,7 +398,12 @@ public class Player extends GameObject {
 		transformed = transform.createTransformedShape(armRechts);
 		g2d.draw(transformed);
 
-		
+		if(playerHelm) {
+			g2d.setColor(cannonColor);
+		    transformed = transform.createTransformedShape(playerhelm);
+		    g2d.fill(transformed);
+		}
+
 
 		// Kanone zeichnen
 		g2d.setColor(cannonColor);

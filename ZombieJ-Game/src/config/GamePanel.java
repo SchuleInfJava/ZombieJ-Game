@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import MenuUI.ActionHandler;
+import MenuUI.ChoosePlayerColor;
+import MenuUI.screen;
 import Objects.Missile;
 import Objects.Player;
 import Objects.Zombie;
@@ -41,7 +43,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 	private boolean gameWin = false;
 	private boolean gameEnd = false;
 	private int money = 0;
-	private static int wave = 29;
+	private static int wave = 0;
 	private boolean wavepaint=false;
 	private int zombiedeaths = 0;
 	private int zombiecounter=0;
@@ -56,6 +58,7 @@ public class GamePanel extends JPanel {// erben von JPanel
 
 	private Timer t;
 
+	
 	private Player player = null;
 	public static List<Missile> missiles;
 	private List<Zombie> zombies;
@@ -64,14 +67,19 @@ public class GamePanel extends JPanel {// erben von JPanel
 	
 	// Konstruktor
 	public GamePanel() {
+		
 		setFocusable(true);
 		setPreferredSize(prefSize);// feldgröße mit dimension
-        setBackground(getBackground());
+       // setBackground(Color.GREEN);
         setLayout(null);
 		initGame(); // Methodeaufruf
 		startGame(); // Methodenaufruf
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+	
 	// abfrage auf was gameover steht
 	public boolean isGameWin() {
 		return gameWin;
@@ -233,18 +241,49 @@ public class GamePanel extends JPanel {// erben von JPanel
 					shopbutton.setBackground(new Color(140,140,140));
 					shopbutton.setFocusPainted(true);
 					shopbutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(4),Color.BLACK));
-				    shopbutton.addActionListener(new ActionHandler());
+				    shopbutton.addActionListener(new ActionListener() {
+						 
+						 @Override public void actionPerformed(ActionEvent e) {
+							 
+
+							 GameWindow.Gameframe.setLocationRelativeTo(null);
+			                 GameWindow.Gameframe.remove(GameWindow.gamepanel);
+			                 GameWindow.Gameframe.add(GameWindow.choosePlayerColor);
+			                 GameWindow.Gameframe.revalidate();
+			                 GameWindow.Gameframe.repaint();
+				             GameWindow.Gameframe.setSize(500,580);
+				             GameWindow.Gameframe.setLocationRelativeTo(null);
+				             
+
+						}
+					});
 				    shopbutton.setVisible(true);
 					
 				    	 
-					 settingsbutton = new JButton("Settings");
+					 settingsbutton = new JButton("Help");
 					 settingsbutton.setBounds(300,430,400,75);
 					 settingsbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
 					 settingsbutton.setForeground(Color.BLACK);
 					 settingsbutton.setBackground(new Color(140,140,140));
 					 settingsbutton.setFocusPainted(true);
 					 settingsbutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(4),Color.BLACK));
-					 settingsbutton.addActionListener(new ActionHandler());
+					 settingsbutton.addActionListener(new ActionListener() {
+						 
+						 @Override public void actionPerformed(ActionEvent e) {
+							 
+
+							 screen.screen=false;
+							 GameWindow.Gameframe.setLocationRelativeTo(null);
+			                 GameWindow.Gameframe.remove(GameWindow.gamepanel);
+			                 GameWindow.Gameframe.add(screen.help);
+			                 GameWindow.Gameframe.revalidate();
+			                 GameWindow.Gameframe.repaint();
+				             GameWindow.Gameframe.setSize(800,620);
+				             GameWindow.Gameframe.setLocationRelativeTo(null);
+				             
+
+						}
+					});
 					 settingsbutton.setVisible(true);
 					 
 					 
