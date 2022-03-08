@@ -17,24 +17,19 @@ public class Zombie extends Player {
 	private Player player;
 	private int zombieart = 1;
 	private Color zombieColor = new Color(0,160,0);
-	private int zdamage = 1;
-	private int zcash=2;
+	private int zdamage = 1; // wie viel schaden ein Zombie macht
+	private int zcash=2;//Geld was man für eine tötung erhält
 
 	public Zombie(Coordinate position, double size, double movingAngle, double movingDistance, Player player) {
 		super(position, size, size, movingAngle, movingDistance);
 		this.player = player;
 		setTurningVelocity(TURNING_VELOCITY * 10);
-		ZombieArt();
-		//setDrivingVelocity(DRIVING_VELOCIY / 2);
-
-		//setLives(zombielives);
-		//setLivesStart(zombielives);
-
+		zombieArt(); //Methodenaufruf
 		setPaintStatusBar(false);
-
 		acceleratePlayer();
 	}
 
+	//Getter / Setter
 	public Player getPlayer() {
 		return player;
 	}
@@ -67,8 +62,9 @@ public class Zombie extends Player {
 		this.zcash = zcash;
 	}
 
+	
 	@Override
-	public void makeMove() {
+	public void makeMove() {//überschreibt die makemove methode
 
 		turnToPlayer();
 
@@ -89,32 +85,20 @@ public class Zombie extends Player {
 		double x = playerCenterX - ZombieCenterX;
 		double y = playerCenterY - ZombieCenterY;
 		double angleToPlayer = Math.atan2(y, x);
-		if (angleToPlayer < 0)
-			angleToPlayer = angleToPlayer + 2 * Math.PI;
 
 		setMovingAngle(angleToPlayer);
 	}
 	
 	
-	public void ZombieArt() {
-		int wert =(int)((Math.random()*100)+1);
-	/*	int wert =(int)((Math.random()*10)+1);
-		switch (wert) {
-		    case 1:
-			case 2:
-				setZombieart(2);
-				break;
-			case 3:
-				setZombieart(3);
-				break;
-			default:
-				setZombieart(1);
-		}*/
+	public void zombieArt() {
 		
-		if(GamePanel.getWave()<10) {
+		//Wahrscheinlichkeit welche Zombieart spawnt
+		int wert =(int)((Math.random()*100)+1);//zufallswert zwischen eins und hundert
+	
+		if(GamePanel.getWave()<10) {//Zwischen Wave 0 bis  9 nur normale Zombies
 			setZombieart(1);
 		}
-		if(GamePanel.getWave()<20 && GamePanel.getWave()>=10) {
+		if(GamePanel.getWave()<20 && GamePanel.getWave()>=10) {//Zwischen  Wave 10 bis 19 Orange zombies kommen dazu
 			
 			if(wert<GamePanel.getWave()*1.5) {
 				setZombieart(2);
@@ -123,7 +107,7 @@ public class Zombie extends Player {
 				setZombieart(1);
 			}
 		}
-		if(GamePanel.getWave()>=20) {
+		if(GamePanel.getWave()>=20) { //Ab Wave 20 kommen Gelbe dazu Wahrscheinlichkeit für Gelb und Orange steigt
 			if(wert<GamePanel.getWave()*1.2) {
 				setZombieart(2);
 			}else if(wert>=GamePanel.getWave()*1.2 && wert<GamePanel.getWave()*1.2+(GamePanel.getWave()/2)*1.2) {
@@ -134,6 +118,7 @@ public class Zombie extends Player {
 			}
 		}
 		
+		//Zombiearten
 		switch (getZombieart()) {
 		case 1:
 			zombieColor = new Color(0,160,0);//Green
@@ -179,7 +164,7 @@ public class Zombie extends Player {
 	private void paintZombie(Graphics2D g2d) {
 
 		// Zombie
-		RoundRectangle2D player = new RoundRectangle2D.Double(getObjectPosition().getX(), getObjectPosition().getY(),
+		RoundRectangle2D body = new RoundRectangle2D.Double(getObjectPosition().getX(), getObjectPosition().getY(),
 				getWidth(), getHeight(), 360, 360);
 
 		Line2D armRechts = new Line2D.Double(getObjectPosition().getX() + getWidth() * 0.6,
@@ -191,12 +176,12 @@ public class Zombie extends Player {
 				getObjectPosition().getY() + getHeight() * 0.32 - getHeight() * 0.14);
 
 		AffineTransform transform = new AffineTransform();
-		transform.rotate(getMovingAngle(), player.getCenterX(), player.getCenterY()); 
+		transform.rotate(getMovingAngle(), body.getCenterX(), body.getCenterY()); 
 		// rotieren es um den bewgungswinkel mit dem ankerpunkt in der mitte des panzers
 
 		// Zeichnen vom Zombie gedreht
 		g2d.setColor(zombieColor);
-		Shape transformed = transform.createTransformedShape(player);
+		Shape transformed = transform.createTransformedShape(body);
 		g2d.fill(transformed);
 		g2d.setColor(Color.BLACK);
 		g2d.setStroke(new BasicStroke((float) 4));

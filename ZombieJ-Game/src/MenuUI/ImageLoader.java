@@ -12,9 +12,15 @@ import javax.swing.ImageIcon;
 public class ImageLoader {
 
 	
-	BufferedImage image;
-	BufferedImage dummy;
-	Icon dreieck;
+	BufferedImage qr;
+	BufferedImage map;
+	BufferedImage wasd;
+	BufferedImage arrows;
+	BufferedImage shop;
+	public BufferedImage pistol;
+	public BufferedImage mp;
+	
+	Icon quit;
 	
 
 
@@ -22,10 +28,15 @@ public class ImageLoader {
 
         try {
         	
-            //image = ImageIO.read(new File("rsc/background.png"));
-            dummy = ImageIO.read(new File("rsc/dummys/4.png")); 
-            //dreieck = new ImageIcon("rsc/dreieck.png");
+            pistol = ImageIO.read(new File("rsc/pistol.png")); 
+            mp  = ImageIO.read(new File("rsc/mp.png"));
             
+            map = ImageIO.read(new File("rsc/dummys/map.png")); 
+            wasd  = ImageIO.read(new File("rsc/dummys/wasd.png"));
+            arrows  = ImageIO.read(new File("rsc/dummys/arrows.png"));
+            shop  = ImageIO.read(new File("rsc/dummys/shop.png"));
+            qr  = ImageIO.read(new File("rsc/dummys/qr.png"));
+            quit = new ImageIcon("rsc/dummys/quit.png");   
             
         } catch (IOException e) {
             

@@ -6,25 +6,20 @@ import javax.swing.JFrame;
 
 import config.GamePanel;
 
-public class screen extends JFrame{
+public class Screen extends JFrame{
 
-
-	
-    public static JFrame frame;
+	public static JFrame frame;
     public static Startscreen startscreen;
-    public static Settings settings;
     public static Help help;
-   
     public static boolean screen=true;
     
    
    
     
-    public screen() {
+    public Screen() {
 		 
 		 frame = new JFrame("ZombieJGame");
 		 this.startscreen= new Startscreen();
-		 this.settings= new Settings();
 		 this.help=new Help();
 		 
 		 frame.setSize(800,600);

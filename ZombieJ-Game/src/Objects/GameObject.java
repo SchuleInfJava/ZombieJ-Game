@@ -73,7 +73,7 @@ public abstract class GameObject { // abstracte klasse wie ein interface
 		return this.getObjectPosition().getY() + this.getHeight() < that.getObjectPosition().getY();
 	}
 
-	// kollisionsabfrage für Vierecke
+	// kollisionsabfrage
 	public boolean touches(GameObject that) {
 		if (this.isLeftOf(that))
 			return false;
@@ -88,7 +88,7 @@ public abstract class GameObject { // abstracte klasse wie ein interface
 	}
 
 	// Bewegungsrichtungen in einen bewegungsvector umgewandelt winkel zu koordinate
-	public static Coordinate polarToCartesianCoordinates(double angle) {
+	public static Coordinate angletoCoordinate(double angle) {
 
 		// X-Achse zeigt nach Osten, Y-Achse zeigt nach Süden beim Zeichnen
 		double x = Math.cos(angle);
@@ -100,7 +100,7 @@ public abstract class GameObject { // abstracte klasse wie ein interface
 	// bewegung
 	public void moveGameObject() {
 
-		Coordinate direction = polarToCartesianCoordinates(movingAngle);// setzt vector auf richtung
+		Coordinate direction = angletoCoordinate(movingAngle);// setzt vector auf richtung
 
 		objectPosition.setX(objectPosition.getX() + direction.getX() * movingDistance);// setzt das neue x auf altes x +
 																						// vektor +entfernung

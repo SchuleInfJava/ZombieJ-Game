@@ -21,30 +21,29 @@ import java.awt.BasicStroke;
 public class Player extends GameObject {
 
 	// Variablen
-	public static final double TURNING_VELOCITY = 0.2; // Drehgeschwindigkeit normal 0.06
-	public static final double DRIVING_VELOCIY = 4.00;// Fahrgeschwindigkeit normal 2
+	public static final double TURNING_VELOCITY = 0.2; // Drehgeschwindigkeit 
+	public static final double DRIVING_VELOCIY = 4.00;// Fahrgeschwindigkeit 
 
-	private Shape  transformedPlayer = new RoundRectangle2D.Double(); // enthält die Transformierte Form des
-																		// Panzerkörpers
+	private Shape  transformedPlayer = new RoundRectangle2D.Double(); // enthält die Transformierte Form des Spielers
+																		
 
 	private double turningVelocity = TURNING_VELOCITY;// Speichert den aktuellen Wert der Drehgeschwindigkeit
 	private double drivingVelocity = DRIVING_VELOCIY; // Speichert den aktuellen Wert der Fahrgeschwindigkeit
 
 	private double deltaMovingAngle = 0; // Fahrtrichtung wieviel sich der im nächsten Zyklus änderrt
-	private Color playerColor = Color.WHITE;
-	private Color cannonColor = Color.GRAY; // farbe der canone
+	private Color playerColor = new Color(255,255,255);
+	private Color cannonColor = new Color(153,153,153); // farbe der canone
 	private int lives = 20; // leben während des spiel welches runtergezählt wird
 	private int livesStart = 20; // startwert leben
 	private boolean paintStatusBar = true; // ob lebensleiste angezeigt werden soll oder nicht
 	
-	private int Shootwait =20;
-	private boolean ableToShoot = false;
-	private int weapon =1;
-	public int damage = 2;
-	public int missiledirection=5;
-	private double tolerance=0;
+	private int shootwait =20; //clock fürs schießen
+	private boolean ableToShoot = false; //ob der Spieler schießen kann oder nicht
+	private int weapon =1; //welche waffe ausgewählt ist
+	public int damage = 2; //wie viel schaden die waffe macht
+	public int missiledirection=5; //wie schnell die Geschöße sich bewegen
+	private double tolerance=0; //wie stark die Geschöße abweichen
 	public boolean stopshoot=true;
-	public boolean playerHelm;
 
 	// konstruktor
 	public Player(Coordinate position, double width, double height, double movingAngle, double movingDistance) {
@@ -184,7 +183,7 @@ public class Player extends GameObject {
 	public void deceleratePlayer() {
 		setMovingDistance(-drivingVelocity);// gerade ausfahren rückwärts wird der fahrtgeschwindigkeit auf die moving
 											// distance gestezt
-	} // halb so schnell
+	} 
 
 	public void stopPlayer() { // setzt die Movingdistance auf 0
 		setMovingDistance(0);
@@ -198,35 +197,18 @@ public class Player extends GameObject {
 		stopshoot=true;
 	}
 
-	/*
-	  @Override public boolean touches(GameObject other) { //überschreibt kollsionsabfrage da diese nicht mehr ausreich da er sich dreht 
-	 Coordinate otherPosition = other.getObjectPosition(); 
-	  double otherCenterX =otherPosition.getX() + other.getWidth()/2; 
-	  double otherCenterY =otherPosition.getY() + other.getHeight()/2;
-	  
-	  return getTransformedPlayer().contains(otherCenterX,otherCenterY);
-	  //kollisonsabfrage aus der awt klasse 
-	  }*/
 	 
 	@Override
 	public void makeMove() {
 		// Winkel der Spielers berechnen
 		double newMovingAngle = getMovingAngle() + deltaMovingAngle;
-
-		if (newMovingAngle < 0) { // falls der winkel kleiner null ist
-			newMovingAngle = newMovingAngle + 2 * Math.PI;
-
-		}
-		if (newMovingAngle > 2 * Math.PI) { // falls der winkel größer 2Pi ist
-			newMovingAngle = newMovingAngle - 2 * Math.PI;
-
-		}
-
 		setMovingAngle(newMovingAngle);// setzen den bewegungswinkel auf den winkel gerade berechnet
 		super.makeMove(); // bewegung des spielers
+		
+		//Methoden aufruf
 		shoottimer();
 		weaponChange();
-		Wallcollision();
+		wallcollision();
 		stopshoot();
 		
 
@@ -244,7 +226,7 @@ public class Player extends GameObject {
 		// Kugel größe und winkel bestimmen und setzen
 		double missileSize = getWidth() * 0.4;
 		double missileAngle = getMovingAngle();
-		Coordinate missileDirection= GameObject.polarToCartesianCoordinates(missileAngle);
+		Coordinate missileDirection= GameObject.angletoCoordinate(missileAngle);
 		
 
 		// Kanonenende bestimmen
@@ -255,7 +237,7 @@ public class Player extends GameObject {
 		Coordinate missileStartPosition = new Coordinate(PlayerCenterX + cannonEndX - missileSize / 2,
 				PlayerCenterY + cannonEndY - missileSize / 6);
 
-		Missile missile = new Missile(missileStartPosition, missileSize, missileAngle+getTolerance(), (getMissiledirection()));//*GamePanel.getZombiealive())+(GamePanel.getZombiealive()/4)); 
+		Missile missile = new Missile(missileStartPosition, missileSize, missileAngle+getTolerance(), (getMissiledirection())); 
 		// erzeugen ein neues Missile
 		if (getWeapon()==1) {
 			missile.setRange(85);
@@ -267,7 +249,7 @@ public class Player extends GameObject {
 		return missile;
 	}
 	
-	public void Wallcollision() {
+	public void wallcollision() {
 		if(getObjectPosition().getY()<=0) {
 			getObjectPosition().setY(0);
 		}
@@ -290,34 +272,34 @@ public class Player extends GameObject {
 		}
 	}
 
+	//clock bis wann man wieder schießen kann
 	public void shoottimer() {
-		if (Shootwait > 0) {
-			Shootwait -= 1;
+		if (shootwait > 0) {
+			shootwait -= 1;
 		} else {
 			setAbleToShoot(true);
 			if(getWeapon()==1) {
-				Shootwait = 20;
+				shootwait = 20;
 			}else {
-				Shootwait =5;
+				shootwait =5;
 			}
 			
 		}
 	}
 	
+	//Waffenwechsel
 	public void weaponChange() {
 		double min = -0.3;
 		double max = 0.3;
 		double range=max -min;
 		
 		if (getWeapon()==1) {
-			playerHelm=false;
+
 			setDamage(4);
-			
 			setMissiledirection(7);
-			
-			setTolerance(0);
+			setTolerance(0);	
 		}else {
-			playerHelm=true;
+
 			setDamage(2);
 			setMissiledirection(10);
 			setTolerance((Math.random()*range)+min);
@@ -338,18 +320,7 @@ public class Player extends GameObject {
 		paintPlayer(g2d); // zeichnet den panzer
 
 	}
-/*	
-	BufferedImage LoadImage(String FileName) {
-		BufferedImage img = null;
-		
-		try {
-			img=ImageIO.read(new File(FileName));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return img;
-	}
-*/
+
 	private void paintPlayer(Graphics2D g2d) {
 
 		// Spieler
@@ -375,9 +346,7 @@ public class Player extends GameObject {
 
 		AffineTransform transform = new AffineTransform();
 		transform.rotate(getMovingAngle(),player.getCenterX(),player.getCenterY());
-		// rotieren es um den
 																	
-
 		// Zeichnen vom Spieler gedreht
 		g2d.setColor(playerColor);
 		Shape transformed = transform.createTransformedShape(player);
@@ -385,25 +354,20 @@ public class Player extends GameObject {
 		g2d.setColor(Color.BLACK);
 		g2d.setStroke(new BasicStroke((float) 4));
 		g2d.draw(transformed);
-		
-
 		setTransformedPlayer(transformed);
 		
-
-
-
 		// Zeichnen von Armen
 		transformed = transform.createTransformedShape(armLinks);
 		g2d.draw(transformed);
 		transformed = transform.createTransformedShape(armRechts);
 		g2d.draw(transformed);
 
-		if(playerHelm) {
+		//Helm
+		if(weapon==2) {
 			g2d.setColor(cannonColor);
 		    transformed = transform.createTransformedShape(playerhelm);
 		    g2d.fill(transformed);
 		}
-
 
 		// Kanone zeichnen
 		g2d.setColor(cannonColor);

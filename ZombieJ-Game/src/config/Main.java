@@ -1,11 +1,11 @@
 package config;
 
-import MenuUI.screen;
+import MenuUI.Screen;
 
 public class Main  {
 
 	public static void main(String[] args) {
-		new screen();
+		new Screen();
 	}
 
 }

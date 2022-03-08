@@ -33,7 +33,7 @@ public class Missile extends GameObject { // erweitert von GameObject
 	public void makeMove() { // überschreibend die makeMove methode
 		if (range > 0)
 			super.makeMove(); // aufruf der makeMove methode der oberklasse solange die range größer als null
-								// ist
+							  // ist
 		range-=1.2;
 	}
 
@@ -43,7 +43,8 @@ public class Missile extends GameObject { // erweitert von GameObject
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Color.YELLOW);
 
-		AffineTransform transform = new AffineTransform(); // rotation dabei bleibt die paraleltät der linien erhalten
+		AffineTransform transform = new AffineTransform(); // rotation dabei bleibt die parallelität der linien erhalten
+		
 		// erzeugen ein Rechteck
 		RoundRectangle2D missileShape = new RoundRectangle2D.Double(getObjectPosition().getX(),
 				getObjectPosition().getY(), getWidth(), getHeight(), 0, 0);

@@ -20,19 +20,21 @@ import javax.swing.JLabel;
 public class Startscreen extends JPanel{
 	
 	private final Dimension size = new Dimension(800, 600);
-	public static JButton startbutton, shopbutton, settingsbutton, helpbutton, quitbutton, button;
+	public static JButton startbutton, helpbutton, quitbutton;
 	public JLabel Title, bg;
 	
 	public Startscreen() {
+		
 	this.setFocusable(true);
 	this.setPreferredSize(size);
 	this.setLayout(null);
 	this.setVisible(true);
-	Buttoncreator();
+	createButton();
+	buttonListener();
 	
 	}
 	
-	public void Buttoncreator() {
+	public void createButton() {
 		int font=40;
 		int stroke=4;
 
@@ -43,7 +45,6 @@ public class Startscreen extends JPanel{
          startbutton.setBackground(new Color(187,187,187));
          startbutton.setFocusPainted(false);
          startbutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(stroke),Color.BLACK));
-         startbutton.addActionListener(new ActionHandler());
          startbutton.setVisible(true);
          this.add(startbutton);	 
 	
@@ -54,21 +55,9 @@ public class Startscreen extends JPanel{
          helpbutton.setBackground(new Color(187,187,187));
          helpbutton.setFocusPainted(false);
          helpbutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(stroke),Color.BLACK));
-         helpbutton.addActionListener(new ActionListener() {
-
-             @Override public void actionPerformed(ActionEvent e) {
-
-            	 screen.screen=true;
-                 screen.frame.remove(screen.startscreen);
-                 screen.frame.add(screen.help);
-                 screen.frame.revalidate();
-                 screen.frame.repaint();
-            }
-        });
          helpbutton.setVisible(true);
          this.add(helpbutton);
-		 
-		 
+		  
          quitbutton = new JButton("Quit");
          quitbutton.setBounds(250,460,300,70);
          quitbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, font));
@@ -76,27 +65,51 @@ public class Startscreen extends JPanel{
          quitbutton.setBackground(new Color(255,101,30));
          quitbutton.setFocusPainted(false);
          quitbutton.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(stroke),Color.BLACK));
-         quitbutton.addActionListener(new ActionHandler());
          quitbutton.setVisible(true);
          this.add(quitbutton);
          
          Title = new JLabel("");
-         Title.setIcon(new ImageIcon("rsc/titleGame.png"));
+         Title.setIcon(new ImageIcon("rsc/title.png"));
          Title.setBounds(60,50,600,300);
          this.add(Title);
          
          bg = new JLabel("");
-         bg.setIcon(new ImageIcon("rsc/zombiegame_background.png"));
+         bg.setIcon(new ImageIcon("rsc/background.png"));
          bg.setBounds(0,0,800,600);
          this.add(bg);
-         
+         	  
+	}
+	
+	public void buttonListener() {
+		
+        startbutton.addActionListener(new ActionListener() {
 
-		 
-		 /*
-		 draw draw = new draw();
-	     draw.setBounds(0,0,800,600); //Größe
-	     draw.setVisible(true);
-	     this.add(draw);*/
-		  
+            @Override public void actionPerformed(ActionEvent e) {
+    			new GameWindow();
+   			Screen.frame.setVisible(false);
+
+           }
+       });
+		
+		helpbutton.addActionListener(new ActionListener() {
+
+            @Override public void actionPerformed(ActionEvent e) {
+           	 new Help();
+           	 Screen.screen=true;
+                Screen.frame.remove(Screen.startscreen);
+                Screen.frame.add(Screen.help);
+                Screen.frame.revalidate();
+                Screen.frame.repaint();
+
+           }
+       });
+		
+        quitbutton.addActionListener(new ActionListener() {
+
+            @Override public void actionPerformed(ActionEvent e) {
+    			System.exit(0);
+
+           }
+       });
 	}
 }
