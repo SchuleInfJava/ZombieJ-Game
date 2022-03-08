@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -25,7 +24,6 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import Objects.*;
 import config.*;
  
@@ -37,20 +35,16 @@ public class Shop extends JPanel implements ChangeListener{
     private static JColorChooser cc;
     private static JButton playerColorButton,cannonColorButton,cancelButton,applyButton;
     
-    
-
      
     private Color oldPlayerColor,oldCannonColor,tempPlayerColor,tempCannonColor;
-    public List<Color> playercolors,cannoncolors;//Um gekaufte Farben zu Speichern
+    public List<Color> playercolors,cannoncolors;//Um gekaufte Farben zu speichern
 	
     private boolean playerColor=true;
-    private boolean enoughMoney=true;//Prüft ob man genug geld hat
+    private boolean enoughMoney=true;//prüft ob man genug Geld hat
     private int pmoney=0;
     private int cmoney=0;
     private int amoney=0;
 
-    
-    
      
     public Shop() {
     	
@@ -66,8 +60,7 @@ public class Shop extends JPanel implements ChangeListener{
         this.setBackground(new Color(87,120,150));
         
         createButton();
-        buttonListeners();
-      
+        buttonListeners();    
     }  
     
     public void createButton() {
@@ -120,12 +113,10 @@ public class Shop extends JPanel implements ChangeListener{
         cc.removeChooserPanel(cc.getChooserPanels()[1]);
         cc.getSelectionModel().addChangeListener(this);
         cc.setVisible(true);
-        this.add(cc);
-        
-    	
+        this.add(cc);	
     }
     
-    //Actions für die einzelnen Buttons
+    //actions für die einzelnen Buttons
     private void buttonListeners() {
               
     	oldPlayerColor = player.getPlayerColor();  
@@ -197,7 +188,7 @@ public class Shop extends JPanel implements ChangeListener{
                 	player.setPlayerColor(oldPlayerColor);
                 	player.setCannonColor(oldCannonColor);
                
-                	//Gekaufte Liste und Geld abzug
+                	//gekaufte Liste und Abzug von Geld
                     playercolors.add(oldPlayerColor);
                     cannoncolors.add(oldCannonColor);
                     GameWindow.gamePanel.setMoney(GameWindow.gamePanel.getMoney()-amoney);
@@ -213,11 +204,9 @@ public class Shop extends JPanel implements ChangeListener{
             	}else {
             		enoughMoney=false;
             		repaint();
-            	}
-                
+            	}            
             }
         });
-     
     }
 
 
@@ -233,6 +222,7 @@ public class Shop extends JPanel implements ChangeListener{
             	if(pcolor.equals(newPlayerColor)) {
             		pmoney=0;
             		break;	
+            		
             	}else {
             		pmoney=30;	
             	}
@@ -250,6 +240,7 @@ public class Shop extends JPanel implements ChangeListener{
             	if(i.equals(newCannonColor)) {
             		cmoney=0;
             		break;
+            		
             	}else {
             		cmoney=30;	
             	}
@@ -261,7 +252,6 @@ public class Shop extends JPanel implements ChangeListener{
                 GameWindow.shop.repaint();
             }
 		}
-		
 		amoney=pmoney+cmoney;
     }
 	
@@ -277,9 +267,7 @@ public class Shop extends JPanel implements ChangeListener{
         g.drawString("Shop",160,80);
         g2d.setStroke(new BasicStroke(5));
         g.drawLine(160,83,360,83);
-        
-        
-        
+                  
         //Player Preview
         g.setColor(Color.WHITE);
         g.fillRect(40, 120, 240-1, 180-1);
@@ -290,9 +278,7 @@ public class Shop extends JPanel implements ChangeListener{
         dummyplayer.setPaintStatusBar(false);
         dummyplayer.paintMe(g);
         dummyplayer.setPaintStatusBar(true);
-        
-
-        
+            
         //Subheader
         g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 22));
         g.setColor(Color.BLACK);
@@ -311,8 +297,7 @@ public class Shop extends JPanel implements ChangeListener{
             g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 22));
             g.drawString("Not enough Money",305,295);	
         }
-
-        
+     
         //Choose Color
         g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 30));
 		g.setColor(new Color(240,240,240));
@@ -324,10 +309,7 @@ public class Shop extends JPanel implements ChangeListener{
 		}else {
 			g.drawString("Choose Weapon Color",100,415);
 		}
-        
-		g2d.setStroke(new BasicStroke(1));
-      
+		
+		g2d.setStroke(new BasicStroke(1));  
     }
-	
- 
 }

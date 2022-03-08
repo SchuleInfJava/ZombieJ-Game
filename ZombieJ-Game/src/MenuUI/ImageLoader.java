@@ -8,9 +8,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 
-
 public class ImageLoader {
-
 	
 	BufferedImage qr;
 	BufferedImage map;
@@ -20,14 +18,11 @@ public class ImageLoader {
 	public BufferedImage pistol;
 	public BufferedImage mp;
 	
-	Icon quit;
-	
-
+	Icon quit;	
 
     public ImageLoader(){
 
         try {
-        	
             pistol = ImageIO.read(new File("rsc/pistol.png")); 
             mp  = ImageIO.read(new File("rsc/mp.png"));
             

@@ -7,26 +7,19 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JPanel;
 import javax.swing.text.AttributeSet.ColorAttribute;
-
 import Objects.Missile;
 import Objects.Zombie;
 import config.GameWindow;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
-
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class Help extends JPanel{
-
-	
 
 	public static JButton back,next,quit;
 	public ImageLoader il=new ImageLoader();
@@ -141,9 +134,7 @@ public class Help extends JPanel{
 	        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 40));
 	        g2d.setColor(Color.BLACK);
 	        g.drawString("Page: "+page+"/5",285,560);
-			
-			
-			
+						
 			//Header
 	        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 80));
 	        g2d.setColor(Color.BLACK);
@@ -161,10 +152,7 @@ public class Help extends JPanel{
 			case 4:g.drawString("Shop",170,160);      break;
 			case 5:g.drawString("Tutorial",255,160);  break;
 			}
-
-	        
-
-	        
+	 	        
 	        //Textfield
 	        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 27));
 			g.setColor(Color.BLACK);
@@ -178,8 +166,9 @@ public class Help extends JPanel{
 		        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 28));
 		        g.drawString("==>Erreicht man Wave 50 hat man gewonnen.",48,420);
 				break;
+				
 			case 2:
-			    g.drawImage(il.map, 200, 180,400,300, null);//kordinaten und bild größe
+			    g.drawImage(il.map, 200, 180,400,300, null);//Koordinaten und Größe des Bildes
 		        g.drawRect(200,180,400,300);
 		        g2d.setStroke(new BasicStroke(3));
 		        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 27));
@@ -203,11 +192,12 @@ public class Help extends JPanel{
 		        g.drawLine(560,400,635,425);
 		        
 		       break;
+		       
 			case 3:
 				g2d.setStroke(new BasicStroke(5));
-			    g.drawImage(il.wasd, 170, 180,180,130, null);//kordinaten und bild größe
+			    g.drawImage(il.wasd, 170, 180,180,130, null);//Koordinaten und Größe des Bildes
 		        g.drawRect(170,180,180,130);
-			    g.drawImage(il.arrows, 450, 180,180,130, null);//kordinaten und bild größe
+			    g.drawImage(il.arrows, 450, 180,180,130, null);//Koordinaten und Größe des Bildes
 		        g.drawRect(450,180,180,130);
 		        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 25));
 		        g2d.setStroke(new BasicStroke(3));
@@ -220,9 +210,10 @@ public class Help extends JPanel{
 		        g.drawString("A/Links:links drehen       D/Rechts:rechts drehen",60,410);
 		        g.drawString("1/2:Primär-Waffe/Sekundär-Waffe  Space:Shoot Esc:Options",30,480);
 				break;
+				
 			case 4:
 				g2d.setStroke(new BasicStroke(3));
-			    g.drawImage(il.shop, 470, 120,295,370, null);//kordinaten und bild größe
+			    g.drawImage(il.shop, 470, 120,295,370, null);//Koordinaten und Größe des Bildes
 		        g.drawRect(470,120,295,370);
 		        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 22)); 
 		        g.drawString("Im Shop kann man die Farbe des ",45,200);
@@ -246,14 +237,14 @@ public class Help extends JPanel{
 		        g.drawString("6.Kaufen",220,450);
 
 				break;
+				
 			case 5:
 				g2d.setStroke(new BasicStroke(5));
-			    g.drawImage(il.qr, 250, 180,300,300, null);//kordinaten und bild größe
+			    g.drawImage(il.qr, 250, 180,300,300, null);//Koordinaten und Größe des Bildes
 		        g.drawRect(250,180,300,300);
 				break;
+				
 			}
-
-		}
-		
+		}	
 }	
 		

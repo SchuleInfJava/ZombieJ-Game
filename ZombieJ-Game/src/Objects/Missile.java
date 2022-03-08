@@ -5,21 +5,20 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
-
 import config.Coordinate;
 
-public class Missile extends GameObject { // erweitert von GameObject
+public class Missile extends GameObject { //erweitert von GameObject
 	
 	private double range = 80;
 
-	public Missile(Coordinate position, double size, double movingAngle, double movingDistance) {// konstruktor
-		super(position, size, size / 3);// überlad den konstruktor von GameObject
+	public Missile(Coordinate position, double size, double movingAngle, double movingDistance) {//Konstruktor
+		super(position, size, size / 3);//Überladen des Konstruktors von GameObject
 
 		setMovingAngle(movingAngle);
 		setMovingDistance(movingDistance);
 	}
 
-	// Getter / Setter
+	//getter / setter
 	public double getRange() {
 		return range;
 	}
@@ -28,36 +27,33 @@ public class Missile extends GameObject { // erweitert von GameObject
 		this.range = range;
 	}
 	
-
 	@Override
-	public void makeMove() { // überschreibend die makeMove methode
+	public void makeMove() { //Überschreiben der makeMove-Methode
 		if (range > 0)
-			super.makeMove(); // aufruf der makeMove methode der oberklasse solange die range größer als null
-							  // ist
+			super.makeMove(); //Aufruf der makeMove-Methode der Oberklasse, solange die Range größer als 0 ist
+							  
 		range-=1.2;
 	}
 
 	@Override
-	public void paintMe(java.awt.Graphics g) { // zeichnen der kugeln
+	public void paintMe(java.awt.Graphics g) { //Zeichnen der Kugeln
 		
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Color.YELLOW);
 
-		AffineTransform transform = new AffineTransform(); // rotation dabei bleibt die parallelität der linien erhalten
+		AffineTransform transform = new AffineTransform(); //Rotation, dabei bleibt die Parallelität der Linien erhalten
 		
-		// erzeugen ein Rechteck
+		//erzeugen eines Rechtecks
 		RoundRectangle2D missileShape = new RoundRectangle2D.Double(getObjectPosition().getX(),
 				getObjectPosition().getY(), getWidth(), getHeight(), 0, 0);
 
 		transform.rotate(getMovingAngle(), missileShape.getCenterX(), missileShape.getCenterY());
-		// rotieren es um den bewegungswinkel und nehmen den mittelpunkt als ankerpunkt zum drehen
+		//Rotieren um den Bewegungswinkel dabei dient der Mittelpunkt als Ankerpunkt zum drehen	
 		
 		Shape transformedMissileShape = transform.createTransformedShape(missileShape);
 
-		g2d.fill(transformedMissileShape); // zeichen des quadrates
-
+		g2d.fill(transformedMissileShape); //Zeichen des Quadrats
 	}
-
 }
 
 

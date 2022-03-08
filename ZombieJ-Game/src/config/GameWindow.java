@@ -7,22 +7,21 @@ import MenuUI.Shop;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class GameWindow extends JFrame {// erben von JFrame
+public class GameWindow extends JFrame {//Erben von JFrame
 
-	public static GamePanel gamePanel;// Membervariable vom typ gamepanel
+	public static GamePanel gamePanel;//Membervariable vom typ gamepanel
 	public static Shop shop;
 	public static JFrame gameFrame;
 
 	public GameWindow() {
 
-
 		gameFrame = new JFrame();
-		gamePanel = new GamePanel(); // neues Gamepanel erstellt
+		gamePanel = new GamePanel(); //neues Gamepanel erstellt
 		shop  = new Shop();
 
-		windowListener(); // methoden aufruf
+		windowListener(); //Methodenaufruf
 
-		gameFrame.add(gamePanel); // fügt dem Jframe das panel hinzu
+		gameFrame.add(gamePanel); //fügt dem Jframe das Panel hinzu
 		gameFrame.pack();
 		gameFrame.setTitle("ZombieJ-Game");
         gameFrame.setResizable(false);
@@ -31,10 +30,9 @@ public class GameWindow extends JFrame {// erben von JFrame
 
 	}
 
-	// Windowlistener prüft auf aktion mit dem fenster
+	//Windowlistener prüft auf Aktion mit dem Fenster
 	private void windowListener() {
-		gameFrame.addWindowListener(new WindowAdapter() { // abstrakte klasse welche nicht alle anweisungen von windowlistener
-												// übernimmt
+		gameFrame.addWindowListener(new WindowAdapter() { //abstrakte Klasse welche nicht alle Anweisungen vom Windowlistener übernimmt
 			@Override
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
@@ -42,7 +40,7 @@ public class GameWindow extends JFrame {// erben von JFrame
 
 			@Override
 			public void windowDeactivated(WindowEvent e) {
-				gamePanel.pauseGame(); // hier wird das spiel Pausiert
+				gamePanel.pauseGame(); //Spiel pausiert
 			
 			}
 
@@ -50,11 +48,8 @@ public class GameWindow extends JFrame {// erben von JFrame
 			public void windowActivated(WindowEvent e) {
 				if(gamePanel.isOtherJPanelOpen()==false) {
 					gamePanel.continueGame();
-				}
-				
-			
+				}			
 			}
 		});
 	}
-
 }

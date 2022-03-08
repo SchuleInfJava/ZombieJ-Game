@@ -20,32 +20,32 @@ import java.awt.BasicStroke;
 
 public class Player extends GameObject {
 
-	// Variablen
-	public static final double TURNING_VELOCITY = 0.2; // Drehgeschwindigkeit 
-	public static final double DRIVING_VELOCIY = 4.00;// Fahrgeschwindigkeit 
+	//Variablen
+	public static final double TURNING_VELOCITY = 0.2; //Drehgeschwindigkeit 
+	public static final double DRIVING_VELOCIY = 4.00;//Fahrgeschwindigkeit 
 
-	private Shape  transformedPlayer = new RoundRectangle2D.Double(); // enthält die Transformierte Form des Spielers
-																		
+	private Shape  transformedPlayer = new RoundRectangle2D.Double(); //enthält die transformierte Form des Spielers
+														
 
-	private double turningVelocity = TURNING_VELOCITY;// Speichert den aktuellen Wert der Drehgeschwindigkeit
-	private double drivingVelocity = DRIVING_VELOCIY; // Speichert den aktuellen Wert der Fahrgeschwindigkeit
+	private double turningVelocity = TURNING_VELOCITY;//speichert den aktuellen Wert der Drehgeschwindigkeit
+	private double drivingVelocity = DRIVING_VELOCIY; //speichert den aktuellen Wert der Fahrgeschwindigkeit
 
-	private double deltaMovingAngle = 0; // Fahrtrichtung wieviel sich der im nächsten Zyklus änderrt
+	private double deltaMovingAngle = 0; //Fahrtrichtung wie viel sich der im nächsten Zyklus ändert
 	private Color playerColor = new Color(255,255,255);
-	private Color cannonColor = new Color(153,153,153); // farbe der canone
-	private int lives = 20; // leben während des spiel welches runtergezählt wird
-	private int livesStart = 20; // startwert leben
-	private boolean paintStatusBar = true; // ob lebensleiste angezeigt werden soll oder nicht
+	private Color cannonColor = new Color(153,153,153); //Farbe der Pistole
+	private int lives = 20; //Leben des Spielers
+	private int livesStart = 20; //startwert Leben
+	private boolean paintStatusBar = true; //prüft ob Lebensleiste angezeigt werden soll oder nicht
 	
-	private int shootwait =20; //clock fürs schießen
-	private boolean ableToShoot = false; //ob der Spieler schießen kann oder nicht
-	private int weapon =1; //welche waffe ausgewählt ist
-	public int damage = 2; //wie viel schaden die waffe macht
-	public int missiledirection=5; //wie schnell die Geschöße sich bewegen
-	private double tolerance=0; //wie stark die Geschöße abweichen
+	private int shootwait =20; //Clock für das Schießen
+	private boolean ableToShoot = false; //prüft ob der Spieler schießen kann oder nicht
+	private int weapon =1; //prüft welche Waffe ausgewählt ist
+	public int damage = 2; //Schaden der Waffe
+	public int missiledirection=5; //Geschwindigkeit der Geschosse
+	private double tolerance=0; //Abweichung der Geschosse
 	public boolean stopshoot=true;
 
-	// konstruktor
+	//Konstruktor
 	public Player(Coordinate position, double width, double height, double movingAngle, double movingDistance) {
 		super(position, width, height);
 
@@ -53,10 +53,7 @@ public class Player extends GameObject {
 		setMovingDistance(movingDistance);
 	}
 
-	/*
-	 * Getter / Setter
-	 * 
-	 */
+	//getter / setter
 
 	public Shape getTransformedPlayer() {
 		return transformedPlayer;
@@ -162,30 +159,28 @@ public class Player extends GameObject {
 		this.paintStatusBar = paintStatusBar;
 	}
 
-	// Methoden
+	//Methoden
 	public void turnPlayerRight() {
-		deltaMovingAngle = turningVelocity; // setzt den änderungwinkel auf drehgeschwindikgeit
+		deltaMovingAngle = turningVelocity; //setzt den Änderungwinkel auf Drehgeschwindigkeit
 	}
 
 	public void turnPlayerLeft() {
-		deltaMovingAngle = -turningVelocity; // setzt den änderungwinkel auf - drehgeschwindikgeit
+		deltaMovingAngle = -turningVelocity; //setzt den Änderungwinkel auf Drehgeschwindigkeit
 	}
 
-	public void stopTurningPlayer() { // setzt den änderungswinkel auf 0 heißt dreht sich nicht
+	public void stopTurningPlayer() { //setzt den Änderungswinkel auf 0 --> dreht sich nicht
 		deltaMovingAngle = 0;
 	}
 
 	public void acceleratePlayer() {
-		setMovingDistance(drivingVelocity); // gerade ausfahren wird der fahrtgeschwindigkeit auf die moving distance
-											// gestezt
+		setMovingDistance(drivingVelocity); //geradeaus fahren
 	}
 
 	public void deceleratePlayer() {
-		setMovingDistance(-drivingVelocity);// gerade ausfahren rückwärts wird der fahrtgeschwindigkeit auf die moving
-											// distance gestezt
+		setMovingDistance(-drivingVelocity);//rückwärts fahren
 	} 
 
-	public void stopPlayer() { // setzt die Movingdistance auf 0
+	public void stopPlayer() { //stehen bleiben
 		setMovingDistance(0);
 	}
 	
@@ -200,12 +195,12 @@ public class Player extends GameObject {
 	 
 	@Override
 	public void makeMove() {
-		// Winkel der Spielers berechnen
+		//Winkel des Spielers berechnen
 		double newMovingAngle = getMovingAngle() + deltaMovingAngle;
-		setMovingAngle(newMovingAngle);// setzen den bewegungswinkel auf den winkel gerade berechnet
-		super.makeMove(); // bewegung des spielers
+		setMovingAngle(newMovingAngle);//setzen den Bewegungswinkel auf den gerade berechneten Winkel
+		super.makeMove(); //Bewegung des Spielers
 		
-		//Methoden aufruf
+		//Methodenaufruf
 		shoottimer();
 		weaponChange();
 		wallcollision();
@@ -214,31 +209,31 @@ public class Player extends GameObject {
 
 	}
 
-	// geschosse werden aus dem ender der kanonen geschossen
+	//Geschosse werden aus dem Ende der Pistolen geschossen
 	public Missile shoot() {
 
-		// Spieler mittelpunkt bestimmen
+		//Mittelpunkt der Spielers bestimmen
 		double PlayerCenterX = getObjectPosition().getX() + getWidth() * 0.5;
 		double PlayerCenterY = getObjectPosition().getY() + getHeight() * 0.5;
-		// kanonen länge bestimmen
+		//Pistolenlänge bestimmen
 		double cannonLength = getWidth() * 0.8;
 
-		// Kugel größe und winkel bestimmen und setzen
+		//Kugel Größe und Winkel bestimmen und setzen
 		double missileSize = getWidth() * 0.4;
 		double missileAngle = getMovingAngle();
 		Coordinate missileDirection= GameObject.angletoCoordinate(missileAngle);
 		
 
-		// Kanonenende bestimmen
+		//Pistolenende bestimmen
 		double cannonEndX = missileDirection.getX() * cannonLength;
 		double cannonEndY = missileDirection.getY() * cannonLength;
 
-		// Koordianten für Missile erzeugen zur hälft in der kanone drin
+		//Koordianten für Geschosse erzeugen, zur Hälfte in der Pistoile drin
 		Coordinate missileStartPosition = new Coordinate(PlayerCenterX + cannonEndX - missileSize / 2,
 				PlayerCenterY + cannonEndY - missileSize / 6);
 
 		Missile missile = new Missile(missileStartPosition, missileSize, missileAngle+getTolerance(), (getMissiledirection())); 
-		// erzeugen ein neues Missile
+		//neues Geschoss wird erzeugt
 		if (getWeapon()==1) {
 			missile.setRange(85);
 		}else {
@@ -272,7 +267,7 @@ public class Player extends GameObject {
 		}
 	}
 
-	//clock bis wann man wieder schießen kann
+	//Firerate
 	public void shoottimer() {
 		if (shootwait > 0) {
 			shootwait -= 1;
@@ -306,28 +301,24 @@ public class Player extends GameObject {
 		}
 	}
 
-	/*
-	 * PaintMe Methode welches zeichnet
-	 */
-
+	//Zeichnen
 	@Override
 	public void paintMe(java.awt.Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 
 		if (isPaintStatusBar()) {
-			paintStatusBars(g2d);// zeichnet die lebensleiste
+			paintStatusBars(g2d);//zeichnen der Lebensleiste
 		}
-		paintPlayer(g2d); // zeichnet den panzer
-
+		paintPlayer(g2d); //zeichnen des Spielers
 	}
 
 	private void paintPlayer(Graphics2D g2d) {
 
-		// Spieler
+		//Spieler
 		RoundRectangle2D player = new RoundRectangle2D.Double(getObjectPosition().getX(), getObjectPosition().getY(),
 				getWidth(), getHeight(), 360, 360);
 
-		// Waffe
+		//Waffe
 		RoundRectangle2D cannon = new RoundRectangle2D.Double(getObjectPosition().getX() + getWidth() * 1.1,
 				getObjectPosition().getY() + getHeight() * 0.5 - getHeight() * 0.14, getWidth() * 0.6,
 				getHeight() * 0.28, 0, 0);
@@ -347,7 +338,7 @@ public class Player extends GameObject {
 		AffineTransform transform = new AffineTransform();
 		transform.rotate(getMovingAngle(),player.getCenterX(),player.getCenterY());
 																	
-		// Zeichnen vom Spieler gedreht
+		//Zeichnen vom Spieler gedreht
 		g2d.setColor(playerColor);
 		Shape transformed = transform.createTransformedShape(player);
 		g2d.fill(transformed);
@@ -356,7 +347,7 @@ public class Player extends GameObject {
 		g2d.draw(transformed);
 		setTransformedPlayer(transformed);
 		
-		// Zeichnen von Armen
+		//Zeichnen von Armen
 		transformed = transform.createTransformedShape(armLinks);
 		g2d.draw(transformed);
 		transformed = transform.createTransformedShape(armRechts);
@@ -369,20 +360,17 @@ public class Player extends GameObject {
 		    g2d.fill(transformed);
 		}
 
-		// Kanone zeichnen
+		//Pistole zeichnen
 		g2d.setColor(cannonColor);
 		transformed = transform.createTransformedShape(cannon);
 		g2d.fill(transformed);
-		
-		
-
 	}
 
 	private void paintStatusBars(Graphics2D g2d) {
 		g2d.setStroke(new BasicStroke((float) 2.0));
 		double barOffsetY = getHeight() * 0.4;
 
-		// paint frame
+		//paint frame
 		g2d.setColor(Color.GRAY);
 		RoundRectangle2D livesBarFrame = new RoundRectangle2D.Double(Math.round(getObjectPosition().getX()) - 1,
 				Math.round(getObjectPosition().getY() - barOffsetY) - 1, getWidth() + 1, 6, 0, 0);
@@ -394,11 +382,9 @@ public class Player extends GameObject {
 			g2d.setColor(Color.RED);
 		}
 
-		// paint bar
+		//paint bar
 		RoundRectangle2D liveBar = new RoundRectangle2D.Double(Math.round(getObjectPosition().getX()),
 				Math.round(getObjectPosition().getY() - barOffsetY), getWidth() / getLivesStart() * (lives), 5, 0, 0);
 		g2d.fill(liveBar);
-
 	}
-
 }

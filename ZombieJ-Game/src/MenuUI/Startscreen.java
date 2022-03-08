@@ -4,14 +4,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JPanel;
-
 import config.GameWindow;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,7 +27,6 @@ public class Startscreen extends JPanel{
 	this.setVisible(true);
 	createButton();
 	buttonListener();
-	
 	}
 	
 	public void createButton() {
@@ -76,8 +71,7 @@ public class Startscreen extends JPanel{
          bg = new JLabel("");
          bg.setIcon(new ImageIcon("rsc/background.png"));
          bg.setBounds(0,0,800,600);
-         this.add(bg);
-         	  
+         this.add(bg);	  
 	}
 	
 	public void buttonListener() {
@@ -87,7 +81,6 @@ public class Startscreen extends JPanel{
             @Override public void actionPerformed(ActionEvent e) {
     			new GameWindow();
    			Screen.frame.setVisible(false);
-
            }
        });
 		
@@ -100,7 +93,6 @@ public class Startscreen extends JPanel{
                 Screen.frame.add(Screen.help);
                 Screen.frame.revalidate();
                 Screen.frame.repaint();
-
            }
        });
 		
@@ -108,7 +100,6 @@ public class Startscreen extends JPanel{
 
             @Override public void actionPerformed(ActionEvent e) {
     			System.exit(0);
-
            }
        });
 	}

@@ -1,9 +1,6 @@
 package MenuUI;
- 
-
 
 import javax.swing.JFrame;
-
 import config.GamePanel;
 
 public class Screen extends JFrame{
@@ -12,9 +9,7 @@ public class Screen extends JFrame{
     public static Startscreen startscreen;
     public static Help help;
     public static boolean screen=true;
-    
-   
-   
+       
     
     public Screen() {
 		 
@@ -30,6 +25,5 @@ public class Screen extends JFrame{
 		 frame.setResizable(false);
 		 frame.setLocationRelativeTo(null);
 		 frame.setVisible(true);
-		 
 	 }
 }
