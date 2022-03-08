@@ -303,7 +303,7 @@ public class Shop extends JPanel implements ChangeListener{
 		g.setColor(Color.BLACK);
 		g.drawString("Money: "+GameWindow.gamePanel.getMoney()+"$",305,145);
         g.drawString("Player-Cost:"+pmoney,305,185);
-        g.drawString("Cannon-Cost:"+cmoney,305,225);
+        g.drawString("Weapon-Cost:"+cmoney,305,225);
         g.drawString("All-Cost:"+amoney,305,265);
         
         if(enoughMoney==false) {
